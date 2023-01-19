@@ -1,0 +1,96 @@
+/* parent container ************ */
+.parent_container {
+    border: 2px solid black;
+    width: 100vw;
+    height: 16vh;
+}
+
+
+/* child container ************** */
+.child_container {
+    border: 1px solid red;
+    width: 75%;
+    height: 100%;
+    margin: auto;
+}
+
+
+/* top row starts ***************** */
+.top_row {
+border: 1px solid saddlebrown;
+height: 22%;
+width: 35%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-left: 65%;
+}
+
+.top_row_content {
+    border: 1px solid gold;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* mid row ****************************  */
+.mid_row {
+border: 1px solid red;
+height: 50%;
+width: 100%;
+display: flex;
+justify-content: space-between;
+
+}
+.mid_row_logo {
+    border: 1px solid black;
+    width: 16%;
+    height: 100%;
+}
+.mid_row_input {
+    border: 1px solid black;
+    width: 55%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.mid_row_cart {
+    border: 1px solid black;
+    width: 12%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F2F2F2;
+}
+
+/* bottom row********************************** */
+.bottom_row {
+    border: 1px solid purple;
+    height: 28%;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+.dropdown {
+border: 1px solid black;
+width: 17%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+background-color: #84c225;
+color: white;
+
+}
+.offers {
+   border: 1px solid black; 
+   width: 7%;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
