@@ -1,40 +1,18 @@
+import { getCartData } from "@/redux/cartSlice";
 import { Box, Button, Container, Heading, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
-
-{
-  /* <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> */
-}
-<link
-  href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-  rel="stylesheet"
-></link>;
-
-// import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-// import "../Components/cart.css"
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { getData } from "@/redux/cartSlice";
 
 
-// let cartData = []
+let cartData = []
 const Cart = () => {
+  const dispatch = useDispatch()
+  const cartData = useSelector(state => state.cart)
+  
   const [quantity,setQuantity] = useState(1)
-  let cartData = [
-    {
-      id: 1,
-      category: "Fruits and Vegetable",
-      subCat: "Fresho",
-      product: "Cauliflower 1pc",
-      unitPrice: 20,
-      quantity: quantity,
-    },
-    {
-      id: 2,
-      category: "Snacks",
-      subCat: "Betty Crocker",
-      product: "Cauliflower 1pc",
-      unitPrice: 20,
-      quantity: quantity,
-    },
-  ];
+  // const [,setCartData] = useState([])
   const quantityDec = ()=> {
 
     setQuantity(quantity-1)
@@ -42,7 +20,12 @@ const Cart = () => {
   const quantityInc = () =>{
     setQuantity(quantity+1)
   }
-  if (cartData.length == 0) {
+
+  // getCartData(dispatch)
+  useEffect(() =>{
+    axios.get("http://localhost:8080/cart").then(res => dispatch(getData(res.data)))
+  },[])
+  if (cartData.data.length == 0) {
     return (
       <Box margin="auto" maxW="75%" border="1px red solid" h={100}>
         <Text fontSize={25}> There are no items in your basket. </Text>
@@ -102,7 +85,7 @@ const Cart = () => {
             <Text>SAVINGS</Text>
           </Box>
         </Box>
-        {cartData.map((item) => (
+        {cartData.data.map((item) => (
           <Box
             key={item.id}
             display="flex"

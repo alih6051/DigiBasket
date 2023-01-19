@@ -528,5 +528,24 @@
       "image": "https://www.bigbasket.com/media/uploads/p/s/40124625_1-fresho-capsicum-red-organically-grown.jpg",
       "image_url": "https://www.bigbasket.com/pd/40124625/fresho-capsicum-red-organically-grown-1-pc/?nc=L2Category&t_pg=L2Cagegory&t_p=L2Category&t_s=L2Category&t_pos=3&t_ch=desktop"
     }
+  ],
+  "cart":[
+    {
+      "id": 1,
+      "category": "Fruits and Vegetable",
+      "subCat": "Fresho",
+      "product": "Cauliflower 1pc",
+      "unitPrice": 20,
+      "quantity": 1
+
+    },
+    {
+      "id": 2,
+      "category": "Snacks",
+      "subCat": "Betty Crocker",
+      "product": "Cauliflower 1pc",
+      "unitPrice": 20,
+      "quantity": 1
+    }
   ]
 }
