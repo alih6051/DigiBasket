@@ -98,20 +98,20 @@ const Footer = () => {
         {/* container box two  */}
         <div className={styles.box_two} >
           <div className={styles.box_two_text}>
-            <Text fontSize="14px" color="#84c225" w="20%" border="1px solid red">
+            <Text fontSize="14px" color="#84c225" w="20%" >
               POPULAR CATEGORIES:
             </Text>
-            <Text fontSize="14px" color="#808080" w="80%" border="1px solid yellow">
+            <Text fontSize="14px" color="#808080" w="80%" >
               Sunflower Oils, Wheat Atta, Ghee, Milk, Health Drinks, Flakes,
               Organic F&V, Namkeen, Eggs, Floor Cleaners, Other Juices, Leafy
               Vegetables, Frozen Veg Food, Diapers & Wipes,
             </Text>
           </div>
           <div className={styles.box_two_text}>
-            <Text fontSize="14px" color="#84c225"  w="20%" border="1px solid red">
+            <Text fontSize="14px" color="#84c225"  w="20%" >
               POPULAR BRANDS:
             </Text>
-            <Text fontSize="14px" color="#808080" w="80%" border="1px solid yellow">
+            <Text fontSize="14px" color="#808080" w="80%" >
               Amul, Nescafe , MTR, RED BULL , elite cake, Pediasure, Yummiez,
               Yera, Yakult, Britannia, Wow Momo, Fortune , Haldirams , Ferrero,
               Lays, Patanjali, McCain, kwality walls, Cadbury Dairy Milk,
@@ -119,10 +119,10 @@ const Footer = () => {
             </Text>
           </div>
           <div className={styles.box_two_text}>
-            <Text fontSize="14px" color="#84c225" w="20%" border="1px solid red">
+            <Text fontSize="14px" color="#84c225" w="20%">
               CITIES WE SERVE:
             </Text>
-            <Text fontSize="14px" color="#808080" w="80%" border="1px solid yellow">
+            <Text fontSize="14px" color="#808080" w="80%" >
               Bangalore, Hyderabad, Mumbai, Pune, Chennai, Delhi, Mysore,
               Madurai, Coimbatore, Vijayawada-Guntur, Kolkata,
               Ahmedabad-Gandhinagar, Nashik Business, Lucknow-Kanpur, Gurgaon,
@@ -140,7 +140,7 @@ const Footer = () => {
             </Text>
           </div>
           <div className={styles.box_two_text}>
-            <Text fontSize="14px" color="#84c225" w="20%" border="1px solid red">
+            <Text fontSize="14px" color="#84c225" w="20%">
               PAYMENT OPTIONS:
             </Text>
             <img style={{width:"300px"}} src="https://www.citypng.com/public/uploads/preview/-11597193844xtj2mnv37b.png" alt="" />
