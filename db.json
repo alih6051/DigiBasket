@@ -1259,5 +1259,66 @@
   ],
   "orders": [],
   "coupons": [],
-  "cart": []
+  "cart": [
+    {
+      "id": 1,
+      "product": "Mini Orange Imported",
+      "quantity": 1,
+      "price": 125
+    },
+    {
+      "id": 2,
+      "product": "Kiwi - Green",
+      "quantity": 1,
+      "price": 224
+    },
+    {
+      "id": 3,
+      "product": "Dragon Fruit (Loose)",
+      "quantity": 1,
+      "price": 300
+    }
+  ],
+  "checkout": [
+    {
+      "id": 1674228572685,
+      "fName": "Shoaib Akhtar",
+      "lName": "Sherani",
+      "contact": "08094941896",
+      "street": "Ward No. 6,Sherani Abad",
+      "pin": "341302"
+    },
+    {
+      "id": 1674228676773,
+      "fName": "Shoaib Akhtar",
+      "lName": "Sherani",
+      "contact": "08094941896",
+      "street": "Ward No. 6,Sherani Abad",
+      "pin": "341302"
+    },
+    {
+      "id": 1674228853624,
+      "fName": "Shoaib Akhtar",
+      "lName": "Sherani",
+      "contact": "08094941896",
+      "street": "Ward No. 6,Sherani Abad",
+      "pin": "341302"
+    },
+    {
+      "id": 1674229607811,
+      "fName": "",
+      "lName": "",
+      "contact": "",
+      "street": "",
+      "pin": ""
+    },
+    {
+      "id": 1674229946938,
+      "fName": "",
+      "lName": "",
+      "contact": "",
+      "street": "",
+      "pin": ""
+    }
+  ]
 }

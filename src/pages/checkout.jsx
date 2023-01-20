@@ -8,31 +8,44 @@ import {
   Select,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import axios from "axios";
+import Link from "next/link";
+import React, { useState } from "react";
 import { GoLocation } from "react-icons/go";
+import { useRouter } from 'next/router'
+import VoucherSummary from "@/components/cart_checkout/VoucherSummary";
+import CheckoutNavbar from "@/components/cart_checkout/CheckoutNavbar";
 
 const Checkout = () => {
+  const [fName,setFname] = useState("");
+  const [lName,setLname] = useState("");
+  const [contact,setContact] = useState("");
+  const [street,setStreet] = useState("");
+  const [city,setCity] = useState("");
+  const [pin, setPin] = useState("");
+  const router = useRouter()
+  // const handleFname = (e) =>{
+  //   setFname(e.target.value)
+  // }
+
+  const handleAddAddress = () =>{
+    let obj = {
+      id:Date.now(),
+      fName:fName,
+      lName:lName,
+      contact:contact,
+      street:street,
+      pin:pin
+    }
+    axios.post("http://localhost:8080/checkout",obj);
+    router.push('/payment')
+  }
+  
   return (
     <div>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        ml={20}
-        mt={5}
-        mr={20}
-        mb={5}
-      >
-        <Image
-          src="https://www.bigbasket.com/static/v2626/common/img/bb_logo.png"
-          alt="bigbasket Logo"
-        />
-        <Heading display="flex" flexDirection="column-reverse" color="gray.500">
-          8094941896
-        </Heading>
-      </Box>
-      <hr />
+      <CheckoutNavbar />
       <Box display="flex">
-        <Box width="60%" ml={20} mt={5} border="1px gray solid" h="100vh">
+        <Box width="60%" ml={20} mt={5} border="1px gray solid" >
           <Box ml={2} mt={5} mb={5} display="flex" gap={2}>
             <GoLocation style={{ marginTop: "5px" }}></GoLocation>
             <Heading size="md" fontWeight="20px">
@@ -40,7 +53,7 @@ const Checkout = () => {
               Delivery Address{" "}
             </Heading>
           </Box>
-          <Box bg="#f5f5f5" width="98%" m="auto" border="1px red solid">
+          <Box bg="#f5f5f5" width="98%" m="auto">
             <Box ml={2} mt={5} mb={5}>
               {" "}
               Personal Details{" "}
@@ -56,7 +69,7 @@ const Checkout = () => {
                 >
                   Enter First Name
                 </span>
-                <Input size="sm" w={200} bg="white"></Input>
+                <Input onChange={(e) => setFname(e.target.value)} size="sm" w={200} bg="white"></Input>
               </Box>
               <Box display="flex" ml={2} flexDirection="column">
                 <span
@@ -66,9 +79,9 @@ const Checkout = () => {
                     fontSize: "13px",
                   }}
                 >
-                  Enter Last Name
+                  Enter Last Name 
                 </span>
-                <Input size="sm" w={200} bg="white"></Input>
+                <Input onChange={(e) => setLname(e.target.value)} size="sm" w={200} bg="white"></Input>
               </Box>
               <Box display="flex" ml={2} flexDirection="column">
                 <span
@@ -80,7 +93,7 @@ const Checkout = () => {
                 >
                   Enter Contact Number
                 </span>
-                <Input size="sm" w={350} bg="white"></Input>
+                <Input onChange={(e) => setContact(e.target.value)} size="sm" w={350} bg="white"></Input>
               </Box>
             </Box>
             <Box mt={5} mb={5} display="flex">
@@ -121,7 +134,7 @@ const Checkout = () => {
                 >
                   Enter Street Details
                 </span>
-                <Input size="sm" w={400} bg="white"></Input>
+                <Input onChange={(e) => setStreet(e.target.value)} size="sm" w={400} bg="white"></Input>
               </Box>
 
               <Box display="flex" ml={2} flexDirection="column">
@@ -184,7 +197,7 @@ const Checkout = () => {
                 >
                   * Enter Pincode
                 </span>
-                <Input size="sm" bg="white" />
+                <Input onChange={(e) => setPin(e.target.value)} size="sm" bg="white" />
               </Box>
             </Box>
             <Box mt={3} w={250} display="flex" ml={2} flexDirection="column">
@@ -217,49 +230,14 @@ const Checkout = () => {
                 color="red"
                 mb={10}
                 size="sm"
+                onClick={handleAddAddress}
               >
                 ADD ADDRESS
               </Button>
             </Box>
           </Box>
         </Box>
-        <Box border="1px gray solid" w="25%" mt={5} ml={10} h={300}>
-          <Heading fontSize="md" mt={3} ml={3}>
-            Apply Voucher
-          </Heading>
-          <Box>
-            <Box ml={3} mt={5} display="flex">
-              <Input w={250} size="sm" placeholder="Enter Voucher Code"></Input>
-              <Button ml={3} size="sm">
-                {" "}
-                Apply{" "}
-              </Button>
-            </Box>
-          </Box>
-          <Heading fontSize="md" mt={3} ml={3}>
-            Order Summary
-          </Heading>
-          <Box>
-            <Box
-              display="flex"
-              bg="#f5f5f5"
-              m={4}
-              justifyContent="space-between"
-            >
-              <Text>Basket Value</Text>
-              <Text>$ 243</Text>
-            </Box>
-            <Box
-              display="flex"
-              bg="#f5f5f5"
-              m={4}
-              justifyContent="space-between"
-            >
-              <Text>Delivery Charge</Text>
-              <Text color="green">FREE</Text>
-            </Box>
-          </Box>
-        </Box>
+        <VoucherSummary />
       </Box>
     </div>
   );

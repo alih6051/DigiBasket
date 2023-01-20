@@ -4,19 +4,29 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getData } from "@/redux/cartSlice";
+import {RxCross2} from "react-icons/rx"
+import { CloseIcon } from "@chakra-ui/icons";
+
+
 
 let cartData = [];
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartData = useSelector((state) => state.cart);
+  const {data} = useSelector((state) => state.cart);
 
-  const [quantity, setQuantity] = useState(1);
+  
   // const [,setCartData] = useState([])
-  const quantityDec = () => {
-    setQuantity(quantity - 1);
+  const quantityDec = (id) => {
+    let filteredData = data.filter((item) => {
+      if(item.id == id){
+        return {...item,quantity:item.quantity}
+      }
+      return item
+    })
+    dispatch(getData(filteredData))
   };
   const quantityInc = () => {
-    setQuantity(quantity + 1);
+      // data.quantity++
   };
 
   // getCartData(dispatch)
@@ -25,7 +35,7 @@ const Cart = () => {
       .get("http://localhost:8080/cart")
       .then((res) => dispatch(getData(res.data)));
   }, []);
-  if (cartData.data.length == 0) {
+  if (data.length == 0) {
     return (
       <Box margin="auto" maxW="75%" border="1px red solid" h={100}>
         <Text fontSize={25}> There are no items in your basket. </Text>
@@ -38,8 +48,8 @@ const Cart = () => {
   }
   return (
     <div>
-      <Container maxW="75%" border="1px red solid">
-        <Box>
+      <Container mt={40} maxW="75%" border="1px red solid">
+        <Box  >
           <h4
             style={{
               fontFamily: "sans-serif",
@@ -85,7 +95,7 @@ const Cart = () => {
             <Text>SAVINGS</Text>
           </Box>
         </Box>
-        {cartData.data.map((item) => (
+        {data.map((item) => (
           <Box
             key={item.id}
             display="flex"
@@ -100,8 +110,8 @@ const Cart = () => {
               <p>{item.product}</p>
             </Box>
 
-            <Box border="1px red solid" display="flex" width="55%">
-              <Text mr={110}>{item.unitPrice}</Text>
+            <Box  display="flex" width="55%">
+              <Text mr={110}>{item.price}</Text>
               <Box mr={110} display="flex" flexDirection="row">
                 <Button onClick={() => quantityDec(item.id)} size="xs" mr={2}>
                   -
@@ -111,7 +121,8 @@ const Cart = () => {
                   +
                 </Button>
               </Box>
-              <Text mr={150}>0</Text>
+              <Text >0</Text>
+              <CloseIcon ml={12} boxSize={3} mt={1.5} mr={16} />
               <Text>0</Text>
             </Box>
           </Box>
@@ -133,7 +144,7 @@ const Cart = () => {
           <Box border="1px red solid" w={300} h={300} mt={10}>
             <Text bg="#4444" m={4} textAlign="center">
               {" "}
-              Sub Total({quantity} items ){" "}
+              Sub Total({data.quantity} items ){" "}
             </Text>
             <p></p>
           </Box>
