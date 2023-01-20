@@ -15,6 +15,7 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
+  Flex,
 } from "@chakra-ui/react";
 import { FiLogOut } from "react-icons/fi";
 import { AiFillInfoCircle } from "react-icons/ai";
@@ -34,6 +35,7 @@ const AdminMenu = () => {
   const orderRef = useRef();
   const accountRef = useRef();
   const discountRef = useRef();
+
   return (
     <>
       <Tabs display={"flex"}>
@@ -50,12 +52,12 @@ const AdminMenu = () => {
           left={0}
           h={"100vh"}
         >
-          <Box width={"60%"} m={"auto"} mt={0} mb={0}>
-            <Text>Logo</Text>
-          </Box>
+          <Flex mt={0} mb={0} justifyContent="center" alignItems="center">
+            <Text>ADMIN | Digi Basket</Text>
+          </Flex>
 
           <Box textAlign={"center"} mt={"20px"}>
-            <Avatar size={"2xl"}></Avatar>
+            <Avatar size={"xl"}></Avatar>
           </Box>
           <Box textAlign={"center"} mt={"20px"} mb={"20px"}>
             <Text>Hasan</Text>
@@ -66,7 +68,7 @@ const AdminMenu = () => {
             ref={dashboardRef}
             mb={"5px"}
             borderRadius={"5px"}
-            _selected={{ color: "white", bg: "blue.500" }}
+            _selected={{ color: "white", bg: "blue.300" }}
           >
             Dashboard
           </Tab>
@@ -75,7 +77,7 @@ const AdminMenu = () => {
             ref={prodRef}
             mb={"5px"}
             borderRadius={"5px"}
-            _selected={{ color: "white", bg: "blue.500" }}
+            _selected={{ color: "white", bg: "blue.300" }}
           >
             Products
           </Tab>
@@ -83,7 +85,7 @@ const AdminMenu = () => {
             ref={orderRef}
             mb={"5px"}
             borderRadius={"5px"}
-            _selected={{ color: "white", bg: "blue.500" }}
+            _selected={{ color: "white", bg: "blue.300" }}
           >
             Orders
           </Tab>
@@ -91,7 +93,7 @@ const AdminMenu = () => {
             ref={customerRef}
             mb={"5px"}
             borderRadius={"5px"}
-            _selected={{ color: "white", bg: "blue.500" }}
+            _selected={{ color: "white", bg: "blue.300" }}
           >
             Customers
           </Tab>
@@ -99,7 +101,7 @@ const AdminMenu = () => {
             ref={discountRef}
             mb={"5px"}
             borderRadius={"5px"}
-            _selected={{ color: "white", bg: "blue.500" }}
+            _selected={{ color: "white", bg: "blue.300" }}
           >
             Discounts
           </Tab>
@@ -110,7 +112,7 @@ const AdminMenu = () => {
             ref={accountRef}
             mb={"5px"}
             borderRadius={"5px"}
-            _selected={{ color: "white", bg: "blue.500" }}
+            _selected={{ color: "white", bg: "blue.300" }}
           >
             Account Info
           </Tab>
@@ -125,22 +127,22 @@ const AdminMenu = () => {
         </TabList>
 
         <TabPanels ml={{ md: "30%", lg: "20%" }}>
-          <TabPanel>
+          <TabPanel p="0">
             <Dashboard />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p="0">
             <Products />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p="0">
             <Orders />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p="0">
             <Customers />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p="0">
             <Discounts />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p="0">
             <AccountInfo />
           </TabPanel>
         </TabPanels>
