@@ -4,8 +4,6 @@ import {
   HStack,
   Card,
   CardBody,
-  CardFooter,
-  Divider,
   Image,
   Stack,
   Text,
@@ -23,12 +21,11 @@ import {
   FaCartPlus,
   FaTruckMoving,
 } from "react-icons/fa";
-import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 
 // box-shadow:;
 //FaCertificate;
-export default function Cards({ data }) {
-  const { discount, image, title, rate, id } = data;
+export default function Cards({ data, cateicons }) {
+  const { discount, image, title, rate, id, brand } = data;
   const [togglePrice, setTogglePrice] = useState(rate[0].price);
   const [toggleStrikePrice, setToggleStrikePrice] = useState(
     rate[0].strikePrice
@@ -50,15 +47,14 @@ export default function Cards({ data }) {
     setAddToCart(id);
   };
 
- const [isHovering, setHovering] = useState("");
+  const [isHovering, setHovering] = useState("");
 
- function handleMouseEnter() {
-   setHovering(true);
- }
- function handleMouseLeave() {
-   setHovering(false);
- }
-  const { veg, nonveg } = CateIcons;
+  function handleMouseEnter() {
+    setHovering(true);
+  }
+  function handleMouseLeave() {
+    setHovering(false);
+  }
 
   const Styles_top = {
     pr: "10px",
@@ -74,27 +70,37 @@ export default function Cards({ data }) {
     transition: "top ease 0.5s",
 
     boxShadow: isHovering
-      ? " rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px": null,
+      ? " rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
+      : null,
   };
-
 
   return (
     <Box>
       <Card
-        width={"240px"}
+        width={{ base: "70%", md: "250px", lg: "220px", xl: "220px" }}
         style={Style_card}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        bg="transparent"
+        color={"black"}
       >
         <CardBody px={"10px"} pt={"5px"} pb={"15px"}>
           <HStack style={Styles_top}>
             <Spacer />
-            <Text>{discount}</Text> <FaCertificate />
+            <Text>
+              Get{"  "} {discount} % off{" "}
+            </Text>{" "}
+            <FaCertificate />
           </HStack>
-          <Image height={"170px"} width="100%" src={image} alt="" />
-          <Image src={veg.src} height={"25px"} alt={"veg-icon"} />
+          <Image
+            height={{ base: "190px", lg: "170px" }}
+            width="100%"
+            src={image}
+            alt=""
+          />
+          <Image src={cateicons.src} height={"25px"} alt={"veg-icon"} />
           <Text as={"p"} color={"gray.500"}>
-            Fresho
+            {brand}
           </Text>
           <Text
             spacing={2}
@@ -125,7 +131,10 @@ export default function Cards({ data }) {
             </Select>
             <Stack bg={"#f4f3f2"} p="5px" pb={"10px"}>
               <HStack>
-                <Text textDecoration={"line-through"} fontSize="12px">
+                <Text
+                  textDecoration={"line-through"}
+                  fontSize={{ base: "16px", md: "16px", lg: "12px" }}
+                >
                   MRP:Rs {toggleStrikePrice}
                 </Text>
                 <Text>Rs {togglePrice}</Text>
@@ -134,21 +143,24 @@ export default function Cards({ data }) {
               <HStack sy={0}>
                 <Text sy={0} _hover={{ color: "green" }} h={"30px"}>
                   {" "}
-                  <FaTruckMoving w={"25px"} h={"30px"} fontSize={"30px"}/>
+                  <FaTruckMoving w={"25px"} h={"30px"} fontSize={"30px"} />
                 </Text>
-                <Text fontSize="12px" spacing={0}>
+                <Text
+                  fontSize={{ base: "16px", md: "16px", lg: "12px" }}
+                  spacing={0}
+                >
                   Standard Delivery: Tomorrow 9:00AM - 1:30PM
                 </Text>
               </HStack>
-              <HStack spacing={7}>
+              <HStack spacing={[10, 10, 10, 7]}>
                 <InputGroup border={"1px solid  #8a8076"} width={"80px"}>
                   <InputLeftAddon
                     borderRadius={0}
                     width={"30px"}
                     pl="1"
                     pr="1"
-                    height="20px"
-                    fontSize={12}
+                    height={{ base: "25px", md: "25px", lg: "20px" }}
+                    fontSize={{ base: "18px", md: "16px", lg: "14px" }}
                     border={"1px solid  #8a8076"}
                     focusBorderColor="#8a8076"
                   >
@@ -158,8 +170,8 @@ export default function Cards({ data }) {
                     bg={"white"}
                     textAlign={"center"}
                     width={"50px"}
-                    padding={1}
-                    height="20px"
+                    padding={[2, 2, 2, 1]}
+                    height={"20px"}
                     type="number"
                     value={Quantity}
                     borderRadius={0}
