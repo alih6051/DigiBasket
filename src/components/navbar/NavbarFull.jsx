@@ -1,12 +1,16 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 import NavbarIcon from "./NavbarIcon";
+import NavbarSearchBar from "./NabarSearchBar";
+import NavbarAccount from "./NavbarAccount";
 
 const NavbarFull = () => {
   return (
-    <Box py={3}>
+    <Flex py={3} justifyContent="space-between" alignItems="center">
       <NavbarIcon />
-    </Box>
+      <NavbarSearchBar />
+      <NavbarAccount />
+    </Flex>
   );
 };
 
