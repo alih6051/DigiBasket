@@ -6,9 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination , Navigation} from "swiper";
 import { Image, Box, Button, Flex , Grid, GridItem, Show, Hide, Text, Center, Divider, IconButton, useBreakpointValue, Heading, UnorderedList, ListItem } from '@chakra-ui/react';
-import Carousel from "@/components/products/Carousels/Carousels";
-import { fruitsVegitables } from "@/assets/cl/fruits-vegetables/fruitsVegitables";
-import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
+ 
  
  
 
@@ -448,7 +446,7 @@ const HomeCom = () => {
         
         </Box>
      </Hide>
-      {/* <Carousel cards={fruitsVegitables}/> */}
+      
     
      <Hide breakpoint='(min-width: 991px)'>
       <Show breakpoint='(min-width: 416px)'>
@@ -562,7 +560,7 @@ const HomeCom = () => {
         
         </Box>
      </Hide>
-      {/* <Carousel cards={fruitsVegitables}/> */}
+    
     
      <Hide breakpoint='(min-width: 991px)'>
       <Show breakpoint='(min-width: 416px)'>
