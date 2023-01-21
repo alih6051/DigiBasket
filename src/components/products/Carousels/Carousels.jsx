@@ -1,7 +1,5 @@
 import {
   Box,
-  createLocalStorageManager,
-  IconButton,
   Image,
   useBreakpointValue,
 } from "@chakra-ui/react";

@@ -1,34 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousels from "@/components/products/Carousels/Carousels";
-import { Box, Center, Container, Divider, Flex, Stack } from "@chakra-ui/react";
+import { Box, Flex, Stack, } from "@chakra-ui/react";
 import { fruitsVegitables } from "@/assets/cl/fruits-vegetables/fruitsVegitables";
 import Cards from "@/components/products/Cards/Cards";
 import FilterSection from "@/components/products/FilterSidebar/FilterSection";
-const cardsData = {
-  id: 1,
-  discount: "Get 42% off",
-  image:
-    "https://www.bigbasket.com/media/uploads/p/s/10000098_9-fresho-coriander-leaves.jpg",
-  title: "Coriander Leaves",
-  rate: [
-    { weight: 100, price: 10, strikePrice: 13 },
-    { weight: 250, price: 20, strikePrice: 25 },
-  ],
-};
-
+import axios from "axios";
+import { ProductGrid } from "@/components/products/Cards/ProductGrid";
+import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
+import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
 const FruitsAndVegetables = () => {
+  let [data, setdata] = useState([])
+
+useEffect(()=>{
+axios
+.get("http://localhost:8080/fruits-vegetables")
+  .then((res) => setdata(res.data));
+},[])
+
+
   return (
-    <Box width="6xl" m={"auto"}>
+    <Box width={["3xl", "4xl", "5xl", "6xl"]} m={"auto"}>
       <Carousels cards={fruitsVegitables} />
 
-      <Box height={"200px"} border={"1px solid red"}>
+      <Box>
         <Flex>
-          <Stack width={"300px"} border={"1px solid yellow"} height={200}>
-            <FilterSection />
+          <Stack width={"300px"}>
+            <FilterSection products={data} />
           </Stack>
 
-          <Stack width={"full"} h={"600px"} borderLeft={"1px solid #d6cbbf"}>
-            <Cards data={cardsData} />
+          <Stack width={"full"} borderLeft={"1px solid #d6cbbf"}>
+            <ProductSectionTop props={`Fruits & Vegetables ${data.length}`} />
+            <Box>
+             
+              <ProductGrid>
+                {data.map((product) => (
+                  <Cards
+                    key={product.id}
+                    data={product}
+                    cateicons={CateIcons.veg}
+                  />
+                ))}
+              </ProductGrid>
+            </Box>
           </Stack>
         </Flex>
       </Box>
