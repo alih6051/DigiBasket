@@ -51,7 +51,7 @@ const HomeCom = () => {
 
        <Box marginBottom="20px">
       <Hide below="md" >
-<Box  marginBottom={"20px"}  w={"90%"} margin={"auto"}>
+<Box  marginBottom={"20px"}  maxW="6xl" margin={"auto"}>
       <Swiper 
        slidesPerView={6}
        spaceBetween={30}
