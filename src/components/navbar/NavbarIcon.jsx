@@ -34,12 +34,37 @@ const NavbarIcon = () => {
           rounded="0"
           py="0"
           boxShadow="rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px"
+          fontSize="sm"
         >
-          <MenuItem>Fruits & Vegetables</MenuItem>
-          <MenuItem>Foodgrains, Oil & Masala</MenuItem>
-          <MenuItem>Mark as Draft</MenuItem>
-          <MenuItem>Delete</MenuItem>
-          <MenuItem>Attend a Workshop</MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Fruits & Vegetables</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/foodgrains-oil-masala"}>
+              Foodgrains, Oil & Masala
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/eggs-meat-fish"}>Eggs, Meat & Fish</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Bakery, Cakes & Dairy</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Beverages</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Snacks & Branded Foods</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Beauty & Hygiene</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Kitchen, Garden & Pets</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Baby Care</Link>
+          </MenuItem>
         </MenuList>
       </Menu>
     </Flex>

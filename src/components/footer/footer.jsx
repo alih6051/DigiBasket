@@ -1,13 +1,12 @@
-import { Text } from "@chakra-ui/react";
-import Image from "next/image";
+import { Text, Image } from "@chakra-ui/react";
+
 import React from "react";
 import styles from "./footer.module.css";
 
-import { FaInstagram, FaTwitter } from "react-icons/fa";
-import { BsFacebook, BsPinterest } from "react-icons/Bs";
-import { AiFillTwitterCircle } from "react-icons/Ai";
+// import { FaInstagram, FaTwitter } from "react-icons/fa";
+// import { BsFacebook, BsPinterest } from "react-icons/Bs";
+// import { AiFillTwitterCircle } from "react-icons/Ai";
 const Footer = () => {
-  
   return (
     <>
       {/* container *************** */}
@@ -74,11 +73,11 @@ const Footer = () => {
             <Text fontSize="15px" color="#84c225">
               Download Our App
             </Text>
-            <img
+            <Image
               src="https://www.bbassets.com/static/v2627/custPage/build/content/img/Google-App-store-icon.png"
               alt="googlePlay"
             />
-            <img
+            <Image
               src="https://www.bbassets.com/static/v2627/custPage/build/content/img/Apple-App-store-icon.png"
               alt="AppStore"
             />
@@ -88,30 +87,30 @@ const Footer = () => {
               Get Social With Us
             </Text>
             <div className={styles.socialHandles}>
-              <BsFacebook size="40px" color="#28388a" />
+              {/* <BsFacebook size="40px" color="#28388a" />
               <BsPinterest size="40px" color="#db1818" />
               <AiFillTwitterCircle size="40px" color="#18aedb" />
-              <FaInstagram size="40px" color="red" />
+              <FaInstagram size="40px" color="red" /> */}
             </div>
           </div>
         </div>
         {/* container box two  */}
-        <div className={styles.box_two} >
+        <div className={styles.box_two}>
           <div className={styles.box_two_text}>
-            <Text fontSize="14px" color="#84c225" w="20%" >
+            <Text fontSize="14px" color="#84c225" w="20%">
               POPULAR CATEGORIES:
             </Text>
-            <Text fontSize="14px" color="#808080" w="80%" >
+            <Text fontSize="14px" color="#808080" w="80%">
               Sunflower Oils, Wheat Atta, Ghee, Milk, Health Drinks, Flakes,
               Organic F&V, Namkeen, Eggs, Floor Cleaners, Other Juices, Leafy
               Vegetables, Frozen Veg Food, Diapers & Wipes,
             </Text>
           </div>
           <div className={styles.box_two_text}>
-            <Text fontSize="14px" color="#84c225"  w="20%" >
+            <Text fontSize="14px" color="#84c225" w="20%">
               POPULAR BRANDS:
             </Text>
-            <Text fontSize="14px" color="#808080" w="80%" >
+            <Text fontSize="14px" color="#808080" w="80%">
               Amul, Nescafe , MTR, RED BULL , elite cake, Pediasure, Yummiez,
               Yera, Yakult, Britannia, Wow Momo, Fortune , Haldirams , Ferrero,
               Lays, Patanjali, McCain, kwality walls, Cadbury Dairy Milk,
@@ -122,7 +121,7 @@ const Footer = () => {
             <Text fontSize="14px" color="#84c225" w="20%">
               CITIES WE SERVE:
             </Text>
-            <Text fontSize="14px" color="#808080" w="80%" >
+            <Text fontSize="14px" color="#808080" w="80%">
               Bangalore, Hyderabad, Mumbai, Pune, Chennai, Delhi, Mysore,
               Madurai, Coimbatore, Vijayawada-Guntur, Kolkata,
               Ahmedabad-Gandhinagar, Nashik Business, Lucknow-Kanpur, Gurgaon,
@@ -143,7 +142,11 @@ const Footer = () => {
             <Text fontSize="14px" color="#84c225" w="20%">
               PAYMENT OPTIONS:
             </Text>
-            <img style={{width:"300px"}} src="https://www.citypng.com/public/uploads/preview/-11597193844xtj2mnv37b.png" alt="" />
+            <Image
+              style={{ width: "300px" }}
+              src="https://www.citypng.com/public/uploads/preview/-11597193844xtj2mnv37b.png"
+              alt=""
+            />
           </div>
         </div>
       </div>

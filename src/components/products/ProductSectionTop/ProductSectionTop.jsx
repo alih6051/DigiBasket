@@ -1,11 +1,20 @@
-import { Box, Divider, Heading, HStack, Select, Spacer, Text } from "@chakra-ui/react"
+import { Box, Divider, Heading, HStack, Select, Spacer, Stack, Text } from "@chakra-ui/react"
+import { useState } from "react";
 import { FaCaretDown, FaTruckMoving } from "react-icons/fa";
+import { Grid } from "swiper";
 
-const ProductSectionTop = ({props}) => {
+const ProductSectionTop = ({ props, handleSortFunctionality }) => {
+  const [sortType, setSortType] = useState("Popularity");
+
+  const handleSort = (e) => {
+    setSortType(e.target.value);
+    handleSortFunctionality(e.target.value);
+  };
+
   return (
     <Box>
-      <HStack p={6}>
-        <Heading as="h4" fontSize={"24px"} fontWeight={400}>
+      <HStack gridColumn={{base:"1", md:"2", lg:"2"}} display={"flex"} p={6}>
+        <Heading as="h4" fontSize={{base:"16px", md:"20px", lg:"24px"}} fontWeight={400}>
           {props}
         </Heading>
         <Spacer />
@@ -13,15 +22,16 @@ const ProductSectionTop = ({props}) => {
         <Select
           fontSize={"16px"}
           height={"30px"}
-          width={"230px"}
+          maxW={"230px"}
           size="xs"
           bg={"whiteAlpha.400"}
           border="1px solid #8a8076"
           colorScheme={"#8a8076"}
           focusBorderColor={"#84c225"}
           icon={<FaCaretDown border="1px solid #84c225" />}
+          value={sortType}
+          onChange={handleSort}
         >
-          <option value="Popularity">Popularity</option>
           <option value="Low to High">Price-Low to High</option>
           <option value="High to Low">Price-High to Low</option>
           <option value="Alphabetical">Alphabetical</option>
@@ -44,5 +54,5 @@ const ProductSectionTop = ({props}) => {
       <br />
     </Box>
   );
-}
+};
 export default ProductSectionTop
