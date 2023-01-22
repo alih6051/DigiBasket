@@ -10,24 +10,67 @@ import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
 const FoodgrainsOilMasala = () => {
  let [data, setdata] = useState([]);
+ const [sort, setSort] = useState(null);
+ const [sortOrder, setsortOrder] = useState("asc");
+ const getData = () => {
+   return axios.get(
+     `http://localhost:8080/foodgrains-oil-masala?_sort=${sort}&_order=${sortOrder}`
+   );
+ };
 
  useEffect(() => {
-   axios
-     .get("http://localhost:8080/foodgrains-oil-masala")
-     .then((res) => setdata(res.data));
- }, []);
+   getData(sort).then((res) => {
+     let updated = res.data.filter((el) => el.active);
+     setdata(updated);
+   });
+ }, [sort, sortOrder]);
 
+ const handleBrand = () => {
+   data.filter((el) => {});
+ };
+
+ const handleSortFunctionality = (val) => {
+   console.log(val);
+   if (val === "Low to High") {
+     setSort("price");
+     setsortOrder("asc");
+     getData(sort);
+   } else if (val === "High to Low") {
+     setSort("price");
+     setsortOrder("desc");
+     getData(sort);
+   } else if (val === "Alphabetical") {
+     setSort("title");
+     setsortOrder("asc");
+     getData(sort);
+   } else if (val === "Rupee saving-Low to High") {
+     setSort("price");
+     setsortOrder("desc");
+     getData(sort);
+   } else if (val === "Rupee saving-High to Low") {
+     setSort("price");
+     setsortOrder("asc");
+     getData(sort);
+   } else if (val === "% Off") {
+     setSort("discount");
+     setsortOrder("desc");
+     getData(sort);
+   }
+ };
   return (
-    <Box width="6xl" m={"auto"}>
+    <Box maxW="6xl" m={"auto"}>
       <Carousels cards={foodGrains} />
       <Box>
         <Flex>
-          <Stack width={"300px"} >
+          <Stack width={"300px"}>
             <FilterSection products={data} />
           </Stack>
 
           <Stack width={"full"} borderLeft={"1px solid #d6cbbf"}>
-            <ProductSectionTop props={`Foodgrains, Oil & Masala ${data.length}`} />
+            <ProductSectionTop
+              props={`Foodgrains, Oil & Masala ${data.length}`}
+              handleSortFunctionality={handleSortFunctionality}
+            />
             <Box>
               <ProductGrid>
                 {data.map((product) => (

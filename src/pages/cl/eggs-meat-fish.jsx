@@ -9,33 +9,85 @@ import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 import { useEffect, useState } from "react";
 import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
 const EggsMeatFish = () => {
-   let [data, setdata] = useState([]);
+  let [data, setdata] = useState([]);
+  const [sort, setSort] = useState(null);
+  const [sortOrder, setsortOrder] = useState("asc");
+  const getData = () => {
+    return axios.get(
+      `http://localhost:8080/eggs-meat-fish?_sort=${sort}&_order=${sortOrder}`
+    );
+  };
 
-   useEffect(() => {
-     axios
-       .get("http://localhost:8080/eggs-meat-fish")
-       .then((res) => setdata(res.data));
-   }, []);
+  useEffect(() => {
+    getData(sort).then((res) => {
+      let updated = res.data.filter((el) => el.active);
+      setdata(updated);
+    });
+  }, [sort, sortOrder]);
+
+  const handleBrand = () => {
+    data.filter((el) => {});
+  };
+
+  const handleSortFunctionality = (val) => {
+    console.log(val);
+    if (val === "Low to High") {
+      setSort("price");
+      setsortOrder("asc");
+      getData(sort);
+    } else if (val === "High to Low") {
+      setSort("price");
+      setsortOrder("desc");
+      getData(sort);
+    } else if (val === "Alphabetical") {
+      setSort("title");
+      setsortOrder("asc");
+      getData(sort);
+    } else if (val === "Rupee saving-Low to High") {
+      setSort("price");
+      setsortOrder("desc");
+      getData(sort);
+    } else if (val === "Rupee saving-High to Low") {
+      setSort("price");
+      setsortOrder("asc");
+      getData(sort);
+    } else if (val === "% Off") {
+      setSort("discount");
+      setsortOrder("desc");
+      getData(sort);
+    }
+  };
+
   return (
-    <Box width="6xl" m={"auto"}>
+    <Box maxW="6xl" m={"auto"}>
       <Carousels cards={eggsMeatsFish} />
       <Box>
         <Flex>
-          <Stack width={"300px"} >
+          <Stack minW={"180px"}  maxW={"300px"}>
             <FilterSection products={data} />
           </Stack>
 
           <Stack width={"full"} borderLeft={"1px solid #d6cbbf"}>
             <ProductSectionTop
-              props={`Egg, Meat & Fishe ${data.length}`}
+              props={`Egg, Meat & Fishe (${data.length})`}
+              handleSortFunctionality={handleSortFunctionality}
             />
-            <Box>
+            <Box pl={1}>
               <ProductGrid>
+                {/* {data.map((product) => {
+                  product.active ? (
+                    <Cards
+                      key={product.id}
+                      data={product}
+                      cateicons={CateIcons.veg}
+                    />
+                  ) : null;
+                })} */}
                 {data.map((product) => (
                   <Cards
                     key={product.id}
                     data={product}
-                    cateicons={CateIcons.nonveg}
+                    cateicons={CateIcons.veg}
                   />
                 ))}
               </ProductGrid>

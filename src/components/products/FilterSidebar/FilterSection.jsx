@@ -1,5 +1,4 @@
 import {
- 
   Stack,
   Text,
   Divider,
@@ -8,37 +7,33 @@ import {
   FormLabel,
   CheckboxGroup,
   Box,
- 
- 
 } from "@chakra-ui/react";
 
 import React, { useState } from "react";
 
- const FilterSection = ({products}) => {
-//    // state to store selected filter options
-//   const [filters, setFilters] = useState({});
+const FilterSection = ({
+  handleFilterFunctionality,
+  freshoRef,
+  organicRef,
+  gopalanRef,
+}) => {
+  const handleBrandChange = (e) => {
+    handleFilterFunctionality(e.target.value, e.target.checked);
+  };
+  const handleSeasonalChange = (e) => {
+    handleFilterFunctionality(e.target.value, e.target.checked);
+  };
 
-//   // function to handle filter changes
-//   const handleFilterChange = (e) => {
-//     const { name, value } = e.target;
-//     setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
-//   };
+  const handleFilterCountry = (e) => {
+    handleFilterFunctionality(e.target.value, e.target.checked);
+  };
+  const handleFilterWeight = (e) => {
+    handleFilterFunctionality(e.target.value, e.target.checked);
+  };
+  const handleFilterDiscount = (e) => {
+    handleFilterFunctionality(e.target.value, e.target.checked);
+  };
 
-//   // function to apply filters to products
-//   const applyFilters = () => {
-//     let filteredProducts = [...products];
-
-//     for (const filter in filters) {
-//       if (filters[filter]) {
-//         filteredProducts = filteredProducts.filter(
-//           (product) => product[filter] === filters[filter]
-//         );
-//       }
-//     }
-
-//     return filteredProducts;
-//   };
-// console.log(applyFilters());
   return (
     <Box>
       <Stack>
@@ -47,9 +42,15 @@ import React, { useState } from "react";
             Category
           </Text>
           <Divider borderColor={"#acb0b9"} />
-          <Text>eggs-meat-fish</Text>
-          <Text>foodgrains-oil-masala</Text>
-          <Text>foodgrains-oil-masala</Text>
+          <Text cursor={"pointer"} _hover={{ color: "#84c225" }}>
+            eggs-meat-fish
+          </Text>
+          <Text cursor={"pointer"} _hover={{ color: "#84c225" }}>
+            foodgrains-oil-masala
+          </Text>
+          <Text cursor={"pointer"} _hover={{ color: "#84c225" }}>
+            foodgrains-oil-masala
+          </Text>
         </Stack>
         <Stack>
           <FormControl as="fieldset">
@@ -60,16 +61,22 @@ import React, { useState } from "react";
             <CheckboxGroup>
               <Stack spacing="1" p={2} fontWeight="350">
                 <Checkbox
+                  ref={freshoRef}
                   value="Fresho"
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleBrandChange}
                 >
                   Fresho
                 </Checkbox>
                 <Checkbox
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
+                  ref={organicRef}
                   value="Organic"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleBrandChange}
                 >
                   Organic
                 </Checkbox>
@@ -77,6 +84,9 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Gopalan Organic"
+                  ref={gopalanRef}
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleBrandChange}
                 >
                   Gopalan Organic
                 </Checkbox>
@@ -92,6 +102,8 @@ import React, { useState } from "react";
                   value="Summer Fruits"
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleSeasonalChange}
                 >
                   Summer Fruits
                 </Checkbox>
@@ -99,6 +111,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Summer Veggies"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleSeasonalChange}
                 >
                   Summer Veggies
                 </Checkbox>
@@ -106,6 +120,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Winter Fruits"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleSeasonalChange}
                 >
                   Winter Fruits
                 </Checkbox>
@@ -113,6 +129,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Winter Veggies"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleSeasonalChange}
                 >
                   Winter Veggies
                 </Checkbox>
@@ -128,6 +146,8 @@ import React, { useState } from "react";
                   value="India"
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterCountry}
                 >
                   India
                 </Checkbox>
@@ -135,6 +155,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="USA"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterCountry}
                 >
                   USA
                 </Checkbox>
@@ -142,6 +164,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Australia"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterCountry}
                 >
                   Australia
                 </Checkbox>
@@ -149,6 +173,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Italy"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterCountry}
                 >
                   Italy
                 </Checkbox>
@@ -156,6 +182,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="China"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterCountry}
                 >
                   China
                 </Checkbox>
@@ -168,9 +196,11 @@ import React, { useState } from "react";
             <CheckboxGroup>
               <Stack spacing="1" p={2} fontWeight="350">
                 <Checkbox
-                  value="Less than Rs 20 "
+                  value="Less than Rs 20"
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterWeight}
                 >
                   Less than Rs 20
                 </Checkbox>
@@ -178,6 +208,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Rs 21 to Rs 50"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterWeight}
                 >
                   Rs 21 to Rs 50
                 </Checkbox>
@@ -185,6 +217,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Rs 51 to Rs 100"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterWeight}
                 >
                   Rs 51 to Rs 100
                 </Checkbox>
@@ -192,6 +226,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Rs 101 to Rs 200"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterWeight}
                 >
                   Rs 101 to Rs 200
                 </Checkbox>
@@ -199,6 +235,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Rs 201 to Rs 500 "
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterWeight}
                 >
                   Rs 201 to Rs 500
                 </Checkbox>
@@ -206,6 +244,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="70 to 100 g (Bunch)"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterWeight}
                 >
                   70 to 100 g (Bunch)
                 </Checkbox>
@@ -221,6 +261,8 @@ import React, { useState } from "react";
                   value="10% - 15% "
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterDiscount}
                 >
                   10% - 15%
                 </Checkbox>
@@ -228,6 +270,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="15% - 25%"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterDiscount}
                 >
                   15% - 25%
                 </Checkbox>
@@ -235,6 +279,8 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="More than 25%"
+                  _hover={{ color: "#84c225" }}
+                  onChange={handleFilterDiscount}
                 >
                   More than 25%
                 </Checkbox>
@@ -250,6 +296,7 @@ import React, { useState } from "react";
                   value="100 - 125 g"
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
+                  _hover={{ color: "#84c225" }}
                 >
                   100 - 125 g
                 </Checkbox>
@@ -257,6 +304,7 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="125 - 200 g"
+                  _hover={{ color: "#84c225" }}
                 >
                   125 - 200 g
                 </Checkbox>
@@ -264,6 +312,7 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="150 - 200 g"
+                  _hover={{ color: "#84c225" }}
                 >
                   150 - 200 g
                 </Checkbox>
@@ -271,6 +320,7 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="100 to 150 g"
+                  _hover={{ color: "#84c225" }}
                 >
                   100 to 150 g
                 </Checkbox>
@@ -278,6 +328,7 @@ import React, { useState } from "react";
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="40 cm"
+                  _hover={{ color: "#84c225" }}
                 >
                   40 cm
                 </Checkbox>
@@ -285,6 +336,7 @@ import React, { useState } from "react";
                   borderColor="#67686b"
                   colorScheme={"whatsapp"}
                   value="More than Rs 501 "
+                  _hover={{ color: "#84c225" }}
                 >
                   More than Rs 501
                 </Checkbox>
@@ -295,9 +347,5 @@ import React, { useState } from "react";
       </Stack>
     </Box>
   );
-}
-export default FilterSection
-
-
-
-
+};
+export default FilterSection;

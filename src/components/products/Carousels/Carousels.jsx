@@ -25,14 +25,14 @@ const slideImages = [
 
 const Carousel = ({ cards }) => {
   return (
-    <Box width="100%" height={300}>
+    <Box width="100%" maxH={300}>
       <Zoom scale={0.4}>
         {cards.map((slideImage, index) => (
           <Box className="each-slide" key={index} width="100%">
             <Image
               alt=""
               src={slideImage.url.src}
-              height={"300"}
+              maxH={"300"}
               width={"100%"}
             ></Image>
           </Box>
