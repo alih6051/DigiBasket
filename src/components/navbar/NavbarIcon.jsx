@@ -34,12 +34,19 @@ const NavbarIcon = () => {
           rounded="0"
           py="0"
           boxShadow="rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px"
+          fontSize="sm"
         >
-          <MenuItem>Fruits & Vegetables</MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Fruits & Vegetables</Link>
+          </MenuItem>
           <MenuItem>Foodgrains, Oil & Masala</MenuItem>
-          <MenuItem>Mark as Draft</MenuItem>
-          <MenuItem>Delete</MenuItem>
-          <MenuItem>Attend a Workshop</MenuItem>
+          <MenuItem>Eggs, Meat & Fish</MenuItem>
+          <MenuItem>Bakery, Cakes & Dairy</MenuItem>
+          <MenuItem>Beverages</MenuItem>
+          <MenuItem>Snacks & Branded Foods</MenuItem>
+          <MenuItem>Beauty & Hygiene</MenuItem>
+          <MenuItem>Kitchen, Garden & Pets</MenuItem>
+          <MenuItem>Baby Care</MenuItem>
         </MenuList>
       </Menu>
     </Flex>
