@@ -1651,7 +1651,7 @@ const HomeCom = () => {
             border="1px solid #e8e8e8"
           >
             <Heading marginBottom={"20px"}>
-              bigbasket – online grocery store
+              digibasket – online grocery store
             </Heading>
             <Text marginBottom={"20px"}>
               Did you ever imagine that the freshest of{" "}

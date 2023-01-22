@@ -13,8 +13,10 @@ import React from "react";
 import logo from "../../assets/logo.png";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import Link from "next/link";
+ 
 
 const NavbarIcon = () => {
+  
   return (
     <Flex alignItems="center">
       <Link href="/">
@@ -40,6 +42,8 @@ const NavbarIcon = () => {
           <MenuItem>Mark as Draft</MenuItem>
           <MenuItem>Delete</MenuItem>
           <MenuItem>Attend a Workshop</MenuItem>
+           
+       
         </MenuList>
       </Menu>
     </Flex>
