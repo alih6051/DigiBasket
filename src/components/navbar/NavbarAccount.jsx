@@ -50,6 +50,8 @@ const NavbarAccount = () => {
     (state) => state.auth
   );
 
+  const { data } = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
 
   const toast = useToast();
@@ -178,7 +180,7 @@ const NavbarAccount = () => {
               alignContent: "center",
             }}
           >
-            {0}
+            {data.length}
           </div>
         </button>
       </Link>

@@ -7,10 +7,10 @@ export const ProductGrid = (props) => {
       React.isValidElement
     ).length;
     return {
-      base: Math.min(2, count),
+      base: Math.min(1, count),
+      sm:Math.min(2, count),
       md: Math.min(3, count),
       lg: Math.min(4, count),
-      
     };
   }, [props.children]);
   return (

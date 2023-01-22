@@ -11,7 +11,18 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.data.push(action.payload);
+      let isAdded = false;
+      state.data = state.data.map((el) => {
+        if (el.id == action.payload.id) {
+          isAdded = true;
+          return { ...el, quantity: el.quantity + action.payload.quantity };
+        } else {
+          return el;
+        }
+      });
+      if (!isAdded) {
+        state.data.push(action.payload);
+      }
     },
     getData: (state, action) => {
       state.data = action.payload;

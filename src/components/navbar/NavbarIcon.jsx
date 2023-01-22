@@ -36,7 +36,9 @@ const NavbarIcon = () => {
           boxShadow="rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px"
           fontSize="sm"
         >
-          <MenuItem>Fruits & Vegetables</MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Fruits & Vegetables</Link>
+          </MenuItem>
           <MenuItem>Foodgrains, Oil & Masala</MenuItem>
           <MenuItem>Eggs, Meat & Fish</MenuItem>
           <MenuItem>Bakery, Cakes & Dairy</MenuItem>
