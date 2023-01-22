@@ -39,14 +39,32 @@ const NavbarIcon = () => {
           <MenuItem>
             <Link href={"/cl/fruits-vegetables"}>Fruits & Vegetables</Link>
           </MenuItem>
-          <MenuItem>Foodgrains, Oil & Masala</MenuItem>
-          <MenuItem>Eggs, Meat & Fish</MenuItem>
-          <MenuItem>Bakery, Cakes & Dairy</MenuItem>
-          <MenuItem>Beverages</MenuItem>
-          <MenuItem>Snacks & Branded Foods</MenuItem>
-          <MenuItem>Beauty & Hygiene</MenuItem>
-          <MenuItem>Kitchen, Garden & Pets</MenuItem>
-          <MenuItem>Baby Care</MenuItem>
+          <MenuItem>
+            <Link href={"/cl/foodgrains-oil-masala"}>
+              Foodgrains, Oil & Masala
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/eggs-meat-fish"}>Eggs, Meat & Fish</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Bakery, Cakes & Dairy</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Beverages</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Snacks & Branded Foods</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Beauty & Hygiene</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Kitchen, Garden & Pets</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={"/cl/fruits-vegetables"}>Baby Care</Link>
+          </MenuItem>
         </MenuList>
       </Menu>
     </Flex>

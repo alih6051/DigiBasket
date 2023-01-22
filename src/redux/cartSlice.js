@@ -27,10 +27,23 @@ export const cartSlice = createSlice({
     getData: (state, action) => {
       state.data = action.payload;
     },
+    removeItem: (state, action) => {
+      state.data = state.data.filter((el) => el.id != action.payload);
+    },
+    updateQuantity: (state, { payload }) => {
+      state.data = state.data.map((el) => {
+        if (el.id == payload.id) {
+          return { ...el, quantity: payload.quant };
+        } else {
+          return el;
+        }
+      });
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart, getData } = cartSlice.actions;
+export const { addToCart, getData, removeItem, updateQuantity } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -63,7 +63,6 @@ const NavbarAccount = () => {
     password: "",
   });
 
-  console.log(signUpData);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleLoginDataChange = (e) => {
