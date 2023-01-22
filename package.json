@@ -27,6 +27,7 @@
     "react-redux": "^8.0.5",
     "react-slick": "^0.29.0",
     "react-slideshow-image": "^4.1.1",
-    "swiper": "^8.4.6"
+    "swiper": "^8.4.6",
+    "vercel": "^28.13.0"
   }
 }
