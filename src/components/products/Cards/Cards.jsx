@@ -23,6 +23,7 @@ import {
 } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
+import { useToast } from "@chakra-ui/react";
 // "id": "a61e9280-99c2-11ed-a786-8160523d452f",
 //       "active": true,
 //       "title": "Onion (Loose)",
@@ -41,6 +42,8 @@ export default function Cards({ data, cateicons }) {
 
   const dispatch = useDispatch();
 
+  const toast = useToast()
+
   const handleChange = (e) => {
     setTogglePrice(e.target.value);
 
@@ -53,6 +56,13 @@ export default function Cards({ data, cateicons }) {
 
   const handleAddTocart = (data) => {
     dispatch(addToCart(data));
+    toast({
+      title: "Added to Cart Succesfully",
+      description: `${Quantity} ${title} added to cart`,
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
   };
 
   const [isHovering, setHovering] = useState("");
@@ -211,6 +221,7 @@ export default function Cards({ data, cateicons }) {
                 >
                   ADD <FaCartPlus height="16px" width="16px" padding={"3px"} />
                 </Button>
+               
               </HStack>
             </Stack>
           </Stack>

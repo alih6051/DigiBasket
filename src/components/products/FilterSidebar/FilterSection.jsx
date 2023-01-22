@@ -8,14 +8,13 @@ import {
   CheckboxGroup,
   Box,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 import React, { useState } from "react";
 
 const FilterSection = ({
   handleFilterFunctionality,
-  freshoRef,
-  organicRef,
-  gopalanRef,
+ 
 }) => {
   const handleBrandChange = (e) => {
     handleFilterFunctionality(e.target.value, e.target.checked);
@@ -34,6 +33,8 @@ const FilterSection = ({
     handleFilterFunctionality(e.target.value, e.target.checked);
   };
 
+
+
   return (
     <Box>
       <Stack>
@@ -42,15 +43,24 @@ const FilterSection = ({
             Category
           </Text>
           <Divider borderColor={"#acb0b9"} />
-          <Text cursor={"pointer"} _hover={{ color: "#84c225" }}>
-            eggs-meat-fish
-          </Text>
-          <Text cursor={"pointer"} _hover={{ color: "#84c225" }}>
-            foodgrains-oil-masala
-          </Text>
-          <Text cursor={"pointer"} _hover={{ color: "#84c225" }}>
-            foodgrains-oil-masala
-          </Text>
+          <Link href={"/cl/eggs-meat-fish"}>
+            {" "}
+            <Text cursor={"pointer"} _hover={{ color: "#84c225" }}>
+              eggs-meat-fish
+            </Text>
+          </Link>
+          <Link href={"/cl/foodgrains-oil-masala"}>
+            {" "}
+            <Text cursor={"pointer"} _hover={{ color: "#84c225" }}>
+              foodgrains-oil-masala
+            </Text>
+          </Link>
+          <Link href={"/cl/fruits-vegetables"}>
+            {" "}
+            <Text cursor={"pointer"} _hover={{ color: "#84c225" }}>
+              fruits-vegetables
+            </Text>
+          </Link>
         </Stack>
         <Stack>
           <FormControl as="fieldset">
@@ -61,7 +71,7 @@ const FilterSection = ({
             <CheckboxGroup>
               <Stack spacing="1" p={2} fontWeight="350">
                 <Checkbox
-                  ref={freshoRef}
+                  // ref={freshoRef}
                   value="Fresho"
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
@@ -73,7 +83,7 @@ const FilterSection = ({
                 <Checkbox
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
-                  ref={organicRef}
+                  // ref={organicRef}
                   value="Organic"
                   _hover={{ color: "#84c225" }}
                   onChange={handleBrandChange}
@@ -84,7 +94,7 @@ const FilterSection = ({
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   value="Gopalan Organic"
-                  ref={gopalanRef}
+                  // ref={gopalanRef}
                   _hover={{ color: "#84c225" }}
                   onChange={handleBrandChange}
                 >
@@ -234,7 +244,7 @@ const FilterSection = ({
                 <Checkbox
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
-                  value="Rs 201 to Rs 500 "
+                  value="Rs 201 to Rs 500"
                   _hover={{ color: "#84c225" }}
                   onChange={handleFilterWeight}
                 >
@@ -243,11 +253,11 @@ const FilterSection = ({
                 <Checkbox
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
-                  value="70 to 100 g (Bunch)"
+                  value="more than 500"
                   _hover={{ color: "#84c225" }}
                   onChange={handleFilterWeight}
                 >
-                  70 to 100 g (Bunch)
+                  more than 500
                 </Checkbox>
               </Stack>
             </CheckboxGroup>
@@ -258,7 +268,7 @@ const FilterSection = ({
             <CheckboxGroup>
               <Stack spacing="1" p={2} fontWeight="350">
                 <Checkbox
-                  value="10% - 15% "
+                  value="10% - 15%"
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   _hover={{ color: "#84c225" }}

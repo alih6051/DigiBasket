@@ -8,7 +8,6 @@ import axios from "axios";
 import { ProductGrid } from "@/components/products/Cards/ProductGrid";
 import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
-import { useRef } from "react";
 const FruitsAndVegetables = () => {
   let [data, setdata] = useState([]);
   let [allData, setAllData] = useState([]);
@@ -39,12 +38,6 @@ const FruitsAndVegetables = () => {
     //  });
   }, [sort, sortOrder]);
 
-  const freshoRef = useRef();
-  const organicRef = useRef();
-  const gopalanRef = useRef();
-
-  
-
   const handleSortFunctionality = (val) => {
     console.log(val);
     if (val === "Low to High") {
@@ -74,8 +67,85 @@ const FruitsAndVegetables = () => {
     }
   };
 
-  const handleFilterFunctionality = (val, status) => {};
-
+  const handleFilterFunctionality = (val, status) => {
+    console.log(val, status);
+    if (val === "Fresho" && status === true) {
+      let filteredData = allData.filter((el) => el.brand === "Fresho");
+      setdata(filteredData);
+    } else if (val === "Fresho" && status === false) {
+      setdata(allData);
+    } else if (val === "Gopalan Organic" && status === true) {
+      let filteredData = allData.filter((el) => el.brand === "Gopalan Organic");
+      setdata(filteredData);
+    } else if (val === "Gopalan Organic" && status === false) {
+      setdata(allData);
+      // PRICE RANGE FILTER
+    } else if (val === "Organic" && status === true) {
+      let filteredData = allData.filter((el) => el.brand === "Organic");
+      setdata(filteredData);
+    } else if (val === "Organic" && status === false) {
+      setdata(allData);
+      // PRICE RANGE FILTER
+    } else if (val === "Less than Rs 20" && status === true) {
+      let filteredData = allData.filter((el) => el.price <= 20);
+      setdata(filteredData);
+    } else if (val === "Less than Rs 20" && status === false) {
+      setdata(allData);
+    } else if (val === "Rs 21 to Rs 50" && status === true) {
+      let filteredData = allData.filter(
+        (el) => el.price > 20 && el.price <= 50
+      );
+      setdata(filteredData);
+    } else if (val === "Rs 21 to Rs 50" && status === false) {
+      setdata(allData);
+    } else if (val === "Rs 51 to Rs 100" && status === true) {
+      let filteredData = allData.filter(
+        (el) => el.price > 51 && el.price <= 100
+      );
+      setdata(filteredData);
+    } else if (val === "Rs 51 to Rs 100" && status === false) {
+      setdata(allData);
+    } else if (val === "Rs 101 to Rs 200" && status === true) {
+      let filteredData = allData.filter(
+        (el) => el.price > 101 && el.price <= 200
+      );
+      setdata(filteredData);
+    } else if (val === "Rs 101 to Rs 200" && status === false) {
+      setdata(allData);
+    } else if (val === "Rs 201 to Rs 500" && status === true) {
+      let filteredData = allData.filter(
+        (el) => el.price > 201 && el.price <= 500
+      );
+      setdata(filteredData);
+    } else if (val === "Rs 201 to Rs 500" && status === false) {
+      setdata(allData);
+    } else if (val === "more than 500" && status === true) {
+      let filteredData = allData.filter((el) => el.price > 501);
+      setdata(filteredData);
+    } else if (val === "more than 500" && status === false) {
+      setdata(allData);
+    }
+    // DISCOUNT WISE FILTER
+    else if (val === "10% - 15%" && status === true) {
+      let filteredData = allData.filter((el) => el.discount <= 15);
+      setdata(filteredData);
+    } else if (val === "10% - 15%" && status === false) {
+      setdata(allData);
+    } else if (val === "15% - 25%" && status === true) {
+      let filteredData = allData.filter(
+        (el) => el.discount > 15 && el.discount <= 25
+      );
+      setdata(filteredData);
+    } else if (val === "15% - 25%" && status === false) {
+      setdata(allData);
+    } else if (val === "More than 25%" && status === true) {
+      let filteredData = allData.filter((el) => el.discount > 25);
+      setdata(filteredData);
+    } else if (val === "More than 25%" && status === false) {
+      setdata(allData);
+    }
+  };
+//
   return (
     <Box maxW={"6xl"} m={"auto"}>
       <Carousels cards={fruitsVegitables} />
@@ -84,9 +154,6 @@ const FruitsAndVegetables = () => {
         <Flex>
           <Stack width={"300px"}>
             <FilterSection
-              freshoRef={freshoRef}
-              organicRef={organicRef}
-              gopalanRef={gopalanRef}
               handleFilterFunctionality={handleFilterFunctionality}
             />
           </Stack>
