@@ -22,17 +22,28 @@ import {
   FaCartPlus,
   FaTruckMoving,
 } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/cartSlice";
+import { useToast } from "@chakra-ui/react";
+// "id": "a61e9280-99c2-11ed-a786-8160523d452f",
+//       "active": true,
+//       "title": "Onion (Loose)",
+//       "image": "https://www.bigbasket.com/media/uploads/p/s/40075537_5-fresho-onion.jpg",
+//       "discount": 37,
+//       "price": 53,
+//       "brand": "Organic"
 
-// box-shadow:;
-//FaCertificate;
 export default function Cards({ data, cateicons }) {
-  const { discount, image, title, rate, id, brand } = data;
-  const [togglePrice, setTogglePrice] = useState(rate[0].price);
+  const { discount, image, title, rate, id, brand, price } = data;
+  const [togglePrice, setTogglePrice] = useState(price);
   const [toggleStrikePrice, setToggleStrikePrice] = useState(
-    rate[0].strikePrice
+    (Math.random() * (2 - 1) + 1) * price
   );
   const [Quantity, setQuantity] = useState(1);
-  const [AddToCart, setAddToCart] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const toast = useToast()
 
   const handleChange = (e) => {
     setTogglePrice(e.target.value);
@@ -44,8 +55,15 @@ export default function Cards({ data, cateicons }) {
     setQuantity(e.target.value);
   };
 
-  const handleAddTocart = (val) => {
-    setAddToCart(id);
+  const handleAddTocart = (data) => {
+    dispatch(addToCart(data));
+    toast({
+      title: "Added to Cart Succesfully",
+      description: `${Quantity} ${title} added to cart`,
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
   };
 
   const [isHovering, setHovering] = useState("");
@@ -78,8 +96,12 @@ export default function Cards({ data, cateicons }) {
   return (
     <Box>
       <Card
+<<<<<<< HEAD
         // width={{ base: "70%", md: "250px", lg: "220px", xl: "220px" }}
         width={"100%"}
+=======
+        maxW={{ base: "100%", md: "250px", lg: "220px", xl: "220px" }}
+>>>>>>> a04dcb0b9559f3df0f796feba96490d3c1c8e718
         style={Style_card}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -94,17 +116,13 @@ export default function Cards({ data, cateicons }) {
             </Text>{" "}
             <FaCertificate />
           </HStack>
-          <Image
-            height={{ base: "190px", lg: "170px" }}
-            width="100%"
-            src={image}
-            alt=""
-          />
+          <Image width="100%" src={image} alt="" />
           <Image src={cateicons.src} height={"25px"} alt={"veg-icon"} />
           <Text as={"p"} color={"gray.500"}>
             {brand}
           </Text>
           <Text
+            noOfLines={1}
             spacing={2}
             as={"h3"}
             fontSize={15}
@@ -125,11 +143,15 @@ export default function Cards({ data, cateicons }) {
               value={togglePrice}
               onChange={handleChange}
             >
-              {rate.map((el, i) => (
-                <option size="xs" key={i + 1} value={el.price}>
-                  {el.weight} g - Rs {el.price}
-                </option>
-              ))}
+              <option size="xs" value={price}>
+                {250} g - Rs {price}
+              </option>
+              <option size="xs" value={price * 2 - 15}>
+                {500} g - Rs {price * 2 - 15}
+              </option>
+              <option size="xs" value={price * 3 - 15}>
+                {1} kg - Rs {price * 3 - 25}
+              </option>
             </Select>
             <Stack bg={"#f4f3f2"} p="5px"  >
               <HStack>
@@ -137,32 +159,35 @@ export default function Cards({ data, cateicons }) {
                   textDecoration={"line-through"}
                   fontSize={{ base: "16px", md: "16px", lg: "12px" }}
                 >
-                  MRP:Rs {toggleStrikePrice}
+                  MRP:Rs {Math.floor(toggleStrikePrice)}
                 </Text>
                 <Text>Rs {togglePrice}</Text>
               </HStack>
               {/* Delivery section */}
               <HStack sy={0}>
-                <Text sy={0} _hover={{ color: "green" }} h={"30px"}>
+                <Text sy={0} _hover={{ color: "green" }} maxH={"30px"}>
                   {" "}
-                  <FaTruckMoving w={"25px"} h={"30px"} fontSize={"30px"} />
+                  <FaTruckMoving
+                    h={"30px"}
+                    fontSize={["16px", "16px", "20px", "30px"]}
+                  />
                 </Text>
                 <Text
-                  fontSize={{ base: "16px", md: "16px", lg: "12px" }}
+                  fontSize={{ base: "10px", md: "12px", lg: "12px" }}
                   spacing={0}
                 >
                   Standard Delivery: Tomorrow 9:00AM - 1:30PM
                 </Text>
               </HStack>
-              <HStack spacing={[10, 10, 10, 7]}>
-                <InputGroup border={"1px solid  #8a8076"} width={"80px"}>
+              <HStack spacing={[5, 6, 7, 7]}>
+                <InputGroup border={"1px solid  #8a8076"} maxW={"80px"}>
                   <InputLeftAddon
                     borderRadius={0}
-                    width={"30px"}
+                    maxW={"30px"}
                     pl="1"
                     pr="1"
-                    height={{ base: "25px", md: "25px", lg: "20px" }}
-                    fontSize={{ base: "18px", md: "16px", lg: "14px" }}
+                    maxH={"20px"}
+                    fontSize={{ base: "12px", md: "14px", lg: "14px" }}
                     border={"1px solid  #8a8076"}
                     focusBorderColor="#8a8076"
                   >
@@ -171,9 +196,9 @@ export default function Cards({ data, cateicons }) {
                   <Input
                     bg={"white"}
                     textAlign={"center"}
-                    width={"50px"}
-                    padding={[2, 2, 2, 1]}
-                    height={"20px"}
+                    maxW={"50px"}
+                    padding={[2, 1, 2, 1]}
+                    maxH={"20px"}
                     type="number"
                     value={Quantity}
                     borderRadius={0}
@@ -185,14 +210,24 @@ export default function Cards({ data, cateicons }) {
                   fontSize={"13px"}
                   bg={"#f7d779"}
                   height="22px"
-                  width={"90px"}
+                  maxW={"90px"}
                   padding={2}
                   px={4}
                   _hover={{ bg: "#e6bf48" }}
-                  onClick={() => handleAddTocart(id)}
+                  onClick={() =>
+                    handleAddTocart({
+                      id,
+                      discount,
+                      image,
+                      title,
+                      price,
+                      quantity: +Quantity,
+                    })
+                  }
                 >
                   ADD <FaCartPlus height="16px" width="16px" padding={"3px"} />
                 </Button>
+               
               </HStack>
               {/* <Flex>
                 <InputGroup>

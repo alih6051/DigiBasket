@@ -15,7 +15,7 @@ const Veg = () => {
 
     useEffect(()=>{
         axios
-        .get("http://localhost:8080/foodgrains-oil-masal")
+        .get("http://localhost:8080/fruits-vegetables")
           .then((res) => setData(res.data));
         },[])
   return (

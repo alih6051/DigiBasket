@@ -488,7 +488,7 @@ axios
 
 
 
-        {/* <Veg/> */}
+        <Veg/>
           
           <Box marginBottom="30px">
             <Box borderBottom={"1px solid #e8e8e8"} marginBottom="20px">

@@ -48,13 +48,29 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
+<<<<<<< HEAD
       state.data.push(action.payload);
       
+=======
+      let isAdded = false;
+      state.data = state.data.map((el) => {
+        if (el.id == action.payload.id) {
+          isAdded = true;
+          return { ...el, quantity: el.quantity + action.payload.quantity };
+        } else {
+          return el;
+        }
+      });
+      if (!isAdded) {
+        state.data.push(action.payload);
+      }
+>>>>>>> a04dcb0b9559f3df0f796feba96490d3c1c8e718
     },
     removeItem: (state, action) => {
       state.data = state.data.filter((el) => el.id != action.payload) ;
        
     },
+<<<<<<< HEAD
     updateQuantity: (state, {payload}) => {
       state.data = state.data.map((el) => {
         if(el.id == payload.id) {
@@ -65,10 +81,29 @@ export const cartSlice = createSlice({
       })
     },
   
+=======
+    removeItem: (state, action) => {
+      state.data = state.data.filter((el) => el.id != action.payload);
+    },
+    updateQuantity: (state, { payload }) => {
+      state.data = state.data.map((el) => {
+        if (el.id == payload.id) {
+          return { ...el, quantity: payload.quant };
+        } else {
+          return el;
+        }
+      });
+    },
+>>>>>>> a04dcb0b9559f3df0f796feba96490d3c1c8e718
   },
 });
 
 // Action creators are generated for each case reducer function
+<<<<<<< HEAD
 export const { addToCart, getData, removeItem, updateQuantity, updateTotal } = cartSlice.actions;
+=======
+export const { addToCart, getData, removeItem, updateQuantity } =
+  cartSlice.actions;
+>>>>>>> a04dcb0b9559f3df0f796feba96490d3c1c8e718
 
 export default cartSlice.reducer;
