@@ -1,38 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Digi Basket - A Clone of bigbasket.com
 
-## Getting Started
+Digi Basket is a clone of bigbasket.com. It is an online grocery shopping and supermarket that delivers personal and household needs to the customer's doorstep.
 
-First, run the development server:
+This was a collaborative project made by 3 members Executed in 5 days.
+1) Mohd Hasan Ali
+2) Md Yajul Ansari
+3) Abhinandan Kumar
+4) Shoaib Akhtar Sherani
+5) Raj
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Original website link: https://www.bigbasket.com/
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Link of our deployed project: https://placid-plane-2533.vercel.app/
+## Tech Stack and Features
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Next JS
+- Redux Toolkit
+- Chakra UI
+- Json-Server
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Pages and features
+- Home Page:- Navigation Bar, Footer.
+- Admin Page :- Admin dashboard.
+- Account Page:- User authentication using local storage.
+- Product Page:- It has sorting & filtering functionality.
+- Cart Page :- Dyanamic cart
 
-## Learn More
+## Glimpse and screenshots of our cloned website:
 
-To learn more about Next.js, take a look at the following resources:
+Home Page
+![App Screenshot](https://i.ibb.co/47TVVLw/home.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Admin Page
+![App Screenshot](https://i.ibb.co/HYZxmsj/admin.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Product Page
+![App Screenshot](https://i.ibb.co/k6HvXRx/product.png)
 
-## Deploy on Vercel
+Account Page
+![App Screenshot](https://i.ibb.co/b59hFR7/account.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Cart Page
+![App Screenshot](https://i.ibb.co/8Drv09G/cart.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Checkout Page
+![App Screenshot](https://i.ibb.co/rdBRT63/chec.png)
