@@ -12,6 +12,7 @@ import {
   InputGroup,
   InputLeftAddon,
   Input,
+  Flex,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import {
@@ -77,7 +78,8 @@ export default function Cards({ data, cateicons }) {
   return (
     <Box>
       <Card
-        width={{ base: "70%", md: "250px", lg: "220px", xl: "220px" }}
+        // width={{ base: "70%", md: "250px", lg: "220px", xl: "220px" }}
+        width={"100%"}
         style={Style_card}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -129,7 +131,7 @@ export default function Cards({ data, cateicons }) {
                 </option>
               ))}
             </Select>
-            <Stack bg={"#f4f3f2"} p="5px" pb={"10px"}>
+            <Stack bg={"#f4f3f2"} p="5px"  >
               <HStack>
                 <Text
                   textDecoration={"line-through"}
@@ -192,6 +194,13 @@ export default function Cards({ data, cateicons }) {
                   ADD <FaCartPlus height="16px" width="16px" padding={"3px"} />
                 </Button>
               </HStack>
+              {/* <Flex>
+                <InputGroup>
+                <InputLeftAddon>Qty</InputLeftAddon>
+                <Input/>
+                </InputGroup>
+                <Button>ADD</Button>
+              </Flex> */}
             </Stack>
           </Stack>
         </CardBody>
