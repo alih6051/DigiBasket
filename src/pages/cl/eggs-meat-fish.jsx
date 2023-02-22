@@ -10,12 +10,12 @@ import { useEffect, useState } from "react";
 import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
 const EggsMeatFish = () => {
   let [data, setdata] = useState([]);
-   let [allData, setAllData] = useState([]);
+  let [allData, setAllData] = useState([]);
   const [sort, setSort] = useState(null);
   const [sortOrder, setsortOrder] = useState("asc");
   const getData = () => {
     return axios.get(
-      `http://localhost:8080/eggs-meat-fish?_sort=${sort}&_order=${sortOrder}`
+      `https://digibasket.onrender.com/eggs-meat-fish?_sort=${sort}&_order=${sortOrder}`
     );
   };
 
@@ -27,7 +27,6 @@ const EggsMeatFish = () => {
     });
   }, [sort, sortOrder]);
 
- 
   const handleSortFunctionality = (val) => {
     console.log(val);
     if (val === "Low to High") {
@@ -57,7 +56,6 @@ const EggsMeatFish = () => {
     }
   };
 
-  
   const handleFilterFunctionality = (val, status) => {
     console.log(val, status);
     if (val === "Fresho" && status === true) {
