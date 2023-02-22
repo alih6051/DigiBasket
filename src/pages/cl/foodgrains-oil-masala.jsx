@@ -9,56 +9,56 @@ import axios from "axios";
 import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
 const FoodgrainsOilMasala = () => {
- let [data, setdata] = useState([]);
+  let [data, setdata] = useState([]);
   let [allData, setAllData] = useState([]);
- const [sort, setSort] = useState(null);
- const [sortOrder, setsortOrder] = useState("asc");
- const getData = () => {
-   return axios.get(
-     `http://localhost:8080/foodgrains-oil-masala?_sort=${sort}&_order=${sortOrder}`
-   );
- };
+  const [sort, setSort] = useState(null);
+  const [sortOrder, setsortOrder] = useState("asc");
+  const getData = () => {
+    return axios.get(
+      `https://digibasket.onrender.com/foodgrains-oil-masala?_sort=${sort}&_order=${sortOrder}`
+    );
+  };
 
- useEffect(() => {
-   getData(sort).then((res) => {
-     let updated = res.data.filter((el) => el.active);
-     setdata(updated);
-     setAllData(updated);
-   });
- }, [sort, sortOrder]);
+  useEffect(() => {
+    getData(sort).then((res) => {
+      let updated = res.data.filter((el) => el.active);
+      setdata(updated);
+      setAllData(updated);
+    });
+  }, [sort, sortOrder]);
 
- const handleBrand = () => {
-   data.filter((el) => {});
- };
+  const handleBrand = () => {
+    data.filter((el) => {});
+  };
 
- const handleSortFunctionality = (val) => {
-   console.log(val);
-   if (val === "Low to High") {
-     setSort("price");
-     setsortOrder("asc");
-     getData(sort);
-   } else if (val === "High to Low") {
-     setSort("price");
-     setsortOrder("desc");
-     getData(sort);
-   } else if (val === "Alphabetical") {
-     setSort("title");
-     setsortOrder("asc");
-     getData(sort);
-   } else if (val === "Rupee saving-Low to High") {
-     setSort("price");
-     setsortOrder("desc");
-     getData(sort);
-   } else if (val === "Rupee saving-High to Low") {
-     setSort("price");
-     setsortOrder("asc");
-     getData(sort);
-   } else if (val === "% Off") {
-     setSort("discount");
-     setsortOrder("desc");
-     getData(sort);
-   }
- };
+  const handleSortFunctionality = (val) => {
+    console.log(val);
+    if (val === "Low to High") {
+      setSort("price");
+      setsortOrder("asc");
+      getData(sort);
+    } else if (val === "High to Low") {
+      setSort("price");
+      setsortOrder("desc");
+      getData(sort);
+    } else if (val === "Alphabetical") {
+      setSort("title");
+      setsortOrder("asc");
+      getData(sort);
+    } else if (val === "Rupee saving-Low to High") {
+      setSort("price");
+      setsortOrder("desc");
+      getData(sort);
+    } else if (val === "Rupee saving-High to Low") {
+      setSort("price");
+      setsortOrder("asc");
+      getData(sort);
+    } else if (val === "% Off") {
+      setSort("discount");
+      setsortOrder("desc");
+      getData(sort);
+    }
+  };
 
   const handleFilterFunctionality = (val, status) => {
     console.log(val, status);
@@ -146,7 +146,6 @@ const FoodgrainsOilMasala = () => {
         <Flex>
           <Stack width={"300px"}>
             <FilterSection
-            
               handleFilterFunctionality={handleFilterFunctionality}
             />
           </Stack>

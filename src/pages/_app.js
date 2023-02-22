@@ -8,7 +8,10 @@ import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const showHeader = router.pathname === "/admin" ? false : true;
+  const showHeader =
+    router.pathname === "/admin" || router.pathname === "/checkout"
+      ? false
+      : true;
 
   return (
     <ChakraProvider theme={theme}>

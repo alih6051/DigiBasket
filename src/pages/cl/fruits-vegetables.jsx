@@ -16,13 +16,13 @@ const FruitsAndVegetables = () => {
   const [filterData, setfilterData] = useState([]);
   const getData = () => {
     return axios.get(
-      `http://localhost:8080/fruits-vegetables?_sort=${sort}&_order=${sortOrder}`
+      `https://digibasket.onrender.com/fruits-vegetables?_sort=${sort}&_order=${sortOrder}`
     );
   };
 
   // const getFilterData=()=>{
   //    return axios.get(
-  //      `http://localhost:8080/fruits-vegetables??title=${[...filterData]}`
+  //      `https://digibasket.onrender.com/fruits-vegetables??title=${[...filterData]}`
   //    );
   // }
 
@@ -145,7 +145,7 @@ const FruitsAndVegetables = () => {
       setdata(allData);
     }
   };
-//
+  //
   return (
     <Box maxW={"6xl"} m={"auto"}>
       <Carousels cards={fruitsVegitables} />

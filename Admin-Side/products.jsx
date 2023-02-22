@@ -43,7 +43,9 @@ const Products = () => {
 
   const getData = () => {
     axios
-      .get(`http://localhost:8080/${category}?_sort=price&_order=${order}`)
+      .get(
+        `https://digibasket.onrender.com/${category}?_sort=price&_order=${order}`
+      )
       .then((res) => dispatch(setAdminData(res.data)));
   };
 
@@ -65,7 +67,7 @@ const Products = () => {
     };
 
     axios
-      .patch(`http://localhost:8080/${category}/${mid}`, dataToSend)
+      .patch(`https://digibasket.onrender.com/${category}/${mid}`, dataToSend)
       .then((res) => {
         getData();
         toast({
@@ -87,7 +89,7 @@ const Products = () => {
 
   const handleToggleStatus = (id, active) => {
     axios
-      .patch(`http://localhost:8080/${category}/${id}`, {
+      .patch(`https://digibasket.onrender.com/${category}/${id}`, {
         active: !active,
       })
       .then((res) => {
