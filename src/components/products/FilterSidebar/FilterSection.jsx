@@ -13,6 +13,7 @@ import Link from "next/link";
 import React from "react";
 
 const FilterSection = ({ handleFilterFunctionality }) => {
+  
   // FILTER BY BRAND
   const handleBrandChange = (e) => {
     handleFilterFunctionality(e.target.value, e.target.checked);
