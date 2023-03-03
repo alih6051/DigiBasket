@@ -48,7 +48,7 @@ const Search = () => {
         columnGap={3}
       >
         {data.map((item) => (
-          <Cards key={item._item} data={item} cateicons={CateIcons} />
+          <Cards key={item._id} data={item} cateicons={CateIcons} />
         ))}
       </SimpleGrid>
     </Container>
