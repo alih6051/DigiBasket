@@ -3,15 +3,12 @@ import { theme } from "../theme";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
 import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/footer/footer";
+import Footer from "@/components/footer/Footer";
 import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const showHeader =
-    router.pathname === "/admin" || router.pathname === "/checkout"
-      ? false
-      : true;
+  const showHeader = router.pathname === "/admin" ? false : true;
 
   return (
     <ChakraProvider theme={theme}>

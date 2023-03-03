@@ -173,11 +173,11 @@
     },
     {
       "id": "a61eb992-99c2-11ed-a786-8160523d452f",
-      "active": false,
+      "active": true,
       "title": "Cabbage",
       "image": "https://www.bigbasket.com/media/uploads/p/s/10000066_25-fresho-cabbage.jpg",
       "discount": 26,
-      "price": 20,
+      "price": 11.5,
       "brand": "Fresho"
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "id": "a61eb998-99c2-11ed-a786-8160523d452f",
-      "active": false,
+      "active": true,
       "title": "Blueberry",
       "image": "https://www.bigbasket.com/media/uploads/p/s/30009286_7-fresho-blueberry.jpg",
       "discount": 27,
@@ -1135,7 +1135,7 @@
       "title": "Chicken Curry Cut Without Skin 500 g + Seer Fish Large Steak/Slice 500 g",
       "image": "https://www.bigbasket.com/media/uploads/p/s/1221165_1-fresho-chicken-curry-cut-without-skin-500-g-seer-fish-large-steakslice-500-g.jpg",
       "discount": 25,
-      "price": 1166,
+      "price": 1166.6,
       "brand": "Gopalan Organic"
     },
     {
