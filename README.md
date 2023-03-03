@@ -13,7 +13,7 @@ This was a collaborative project made by 3 members Executed in 5 days.
 
 Original website link: https://www.bigbasket.com/
 
-Link of our deployed project: https://placid-plane-2533.vercel.app/
+Link of our deployed project: https://digibasket.vercel.app/
 ## Tech Stack and Features
 
 - Next JS
