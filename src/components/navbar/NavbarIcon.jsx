@@ -18,7 +18,7 @@ const NavbarIcon = () => {
   return (
     <Flex alignItems="center">
       <Link href="/">
-        <Image src={logo.src} alt="" w={10} rounded="md" />
+        <Image src={logo.src} alt="" w={24} rounded="md" />
       </Link>
       <Menu>
         <MenuButton

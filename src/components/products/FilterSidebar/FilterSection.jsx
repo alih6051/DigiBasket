@@ -12,10 +12,7 @@ import Link from "next/link";
 
 import React, { useState } from "react";
 
-const FilterSection = ({
-  handleFilterFunctionality,
- 
-}) => {
+const FilterSection = ({ handleFilterFunctionality }) => {
   const handleBrandChange = (e) => {
     handleFilterFunctionality(e.target.value, e.target.checked);
   };
@@ -32,8 +29,6 @@ const FilterSection = ({
   const handleFilterDiscount = (e) => {
     handleFilterFunctionality(e.target.value, e.target.checked);
   };
-
-
 
   return (
     <Box>
