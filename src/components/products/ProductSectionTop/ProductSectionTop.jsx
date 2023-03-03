@@ -14,11 +14,13 @@ const ProductSectionTop = ({ props, handleSortFunctionality }) => {
   return (
     <Box>
       <HStack gridColumn={{base:"1", md:"2", lg:"2"}} display={"flex"} p={6}>
+        {/* -------------------showing number of products available--------------  */}
         <Heading as="h4" fontSize={{base:"16px", md:"20px", lg:"24px"}} fontWeight={400}>
           {props}
         </Heading>
         <Spacer />
 
+{/*------------------------------ sort section --------------------------------- */}
         <Select
           fontSize={"16px"}
           height={"30px"}

@@ -24,13 +24,6 @@ import {
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
 import { useToast } from "@chakra-ui/react";
-// "id": "a61e9280-99c2-11ed-a786-8160523d452f",
-//       "active": true,
-//       "title": "Onion (Loose)",
-//       "image": "https://www.bigbasket.com/media/uploads/p/s/40075537_5-fresho-onion.jpg",
-//       "discount": 37,
-//       "price": 53,
-//       "brand": "Organic"
 
 export default function Cards({ data, cateicons }) {
   const { discount, image, title, rate, id, brand, price } = data;
@@ -50,10 +43,12 @@ export default function Cards({ data, cateicons }) {
     setToggleStrikePrice(+e.target.value + Math.floor(Math.random() * 20));
   };
 
+  //input field on card
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
 
+  //add to card function
   const handleAddTocart = (data) => {
     dispatch(addToCart(data));
     toast({
@@ -65,6 +60,7 @@ export default function Cards({ data, cateicons }) {
     });
   };
 
+  //for showing box shadow on hovering on card 
   const [isHovering, setHovering] = useState("");
 
   function handleMouseEnter() {
@@ -105,6 +101,7 @@ export default function Cards({ data, cateicons }) {
         <CardBody px={"10px"} pt={"5px"} pb={"15px"}>
           <HStack style={Styles_top}>
             <Spacer />
+            {/* discounts */}
             <Text>
               Get{"  "} {discount} % off{" "}
             </Text>{" "}
@@ -221,7 +218,6 @@ export default function Cards({ data, cateicons }) {
                 >
                   ADD <FaCartPlus height="16px" width="16px" padding={"3px"} />
                 </Button>
-               
               </HStack>
             </Stack>
           </Stack>

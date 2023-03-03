@@ -10,22 +10,19 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 
-import React, { useState } from "react";
+import React from "react";
 
 const FilterSection = ({ handleFilterFunctionality }) => {
+  // FILTER BY BRAND
   const handleBrandChange = (e) => {
     handleFilterFunctionality(e.target.value, e.target.checked);
   };
-  const handleSeasonalChange = (e) => {
+ //FILTER BY PRICE RANGE
+  const handleFilterPriceRange = (e) => {
     handleFilterFunctionality(e.target.value, e.target.checked);
   };
 
-  const handleFilterCountry = (e) => {
-    handleFilterFunctionality(e.target.value, e.target.checked);
-  };
-  const handleFilterWeight = (e) => {
-    handleFilterFunctionality(e.target.value, e.target.checked);
-  };
+ // FILTER BY DISCOUNT PERCENT 
   const handleFilterDiscount = (e) => {
     handleFilterFunctionality(e.target.value, e.target.checked);
   };
@@ -33,6 +30,7 @@ const FilterSection = ({ handleFilterFunctionality }) => {
   return (
     <Box>
       <Stack>
+        {/* DIFFERENT CATEGORY PAGE LINK */}
         <Stack spacing={2} p={2}>
           <Text as={"h1"} fontWeight={"600"}>
             Category
@@ -58,6 +56,7 @@ const FilterSection = ({ handleFilterFunctionality }) => {
           </Link>
         </Stack>
         <Stack>
+          {/* OPTINOS FOR FILTER BY BRAND  */}
           <FormControl as="fieldset">
             <FormLabel as="legend" spacing="1">
               Brand
@@ -98,103 +97,8 @@ const FilterSection = ({ handleFilterFunctionality }) => {
               </Stack>
             </CheckboxGroup>
           </FormControl>
-          <FormControl as="fieldset">
-            <FormLabel as="legend">Seasonal</FormLabel>
-            <Divider borderColor={"#acb0b9"} />
-            <CheckboxGroup>
-              <Stack spacing="1" p={2} fontWeight="350">
-                <Checkbox
-                  value="Summer Fruits"
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  _hover={{ color: "#84c225" }}
-                  onChange={handleSeasonalChange}
-                >
-                  Summer Fruits
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="Summer Veggies"
-                  _hover={{ color: "#84c225" }}
-                  onChange={handleSeasonalChange}
-                >
-                  Summer Veggies
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="Winter Fruits"
-                  _hover={{ color: "#84c225" }}
-                  onChange={handleSeasonalChange}
-                >
-                  Winter Fruits
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="Winter Veggies"
-                  _hover={{ color: "#84c225" }}
-                  onChange={handleSeasonalChange}
-                >
-                  Winter Veggies
-                </Checkbox>
-              </Stack>
-            </CheckboxGroup>
-          </FormControl>
-          <FormControl as="fieldset">
-            <FormLabel as="legend">Country</FormLabel>
-            <Divider borderColor={"#acb0b9"} />
-            <CheckboxGroup>
-              <Stack spacing="1" p={2} fontWeight="350">
-                <Checkbox
-                  value="India"
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  _hover={{ color: "#84c225" }}
-                  onChange={handleFilterCountry}
-                >
-                  India
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="USA"
-                  _hover={{ color: "#84c225" }}
-                  onChange={handleFilterCountry}
-                >
-                  USA
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="Australia"
-                  _hover={{ color: "#84c225" }}
-                  onChange={handleFilterCountry}
-                >
-                  Australia
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="Italy"
-                  _hover={{ color: "#84c225" }}
-                  onChange={handleFilterCountry}
-                >
-                  Italy
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="China"
-                  _hover={{ color: "#84c225" }}
-                  onChange={handleFilterCountry}
-                >
-                  China
-                </Checkbox>
-              </Stack>
-            </CheckboxGroup>
-          </FormControl>
+
+          {/* OPTINOS FOR FILTER BY PRICE  */}
           <FormControl as="fieldset">
             <FormLabel as="legend">Price</FormLabel>
             <Divider borderColor={"#acb0b9"} />
@@ -205,7 +109,7 @@ const FilterSection = ({ handleFilterFunctionality }) => {
                   borderColor="#58595b"
                   colorScheme={"whatsapp"}
                   _hover={{ color: "#84c225" }}
-                  onChange={handleFilterWeight}
+                  onChange={handleFilterPriceRange}
                 >
                   Less than Rs 20
                 </Checkbox>
@@ -214,7 +118,7 @@ const FilterSection = ({ handleFilterFunctionality }) => {
                   colorScheme={"whatsapp"}
                   value="Rs 21 to Rs 50"
                   _hover={{ color: "#84c225" }}
-                  onChange={handleFilterWeight}
+                  onChange={handleFilterPriceRange}
                 >
                   Rs 21 to Rs 50
                 </Checkbox>
@@ -223,7 +127,7 @@ const FilterSection = ({ handleFilterFunctionality }) => {
                   colorScheme={"whatsapp"}
                   value="Rs 51 to Rs 100"
                   _hover={{ color: "#84c225" }}
-                  onChange={handleFilterWeight}
+                  onChange={handleFilterPriceRange}
                 >
                   Rs 51 to Rs 100
                 </Checkbox>
@@ -232,7 +136,7 @@ const FilterSection = ({ handleFilterFunctionality }) => {
                   colorScheme={"whatsapp"}
                   value="Rs 101 to Rs 200"
                   _hover={{ color: "#84c225" }}
-                  onChange={handleFilterWeight}
+                  onChange={handleFilterPriceRange}
                 >
                   Rs 101 to Rs 200
                 </Checkbox>
@@ -241,7 +145,7 @@ const FilterSection = ({ handleFilterFunctionality }) => {
                   colorScheme={"whatsapp"}
                   value="Rs 201 to Rs 500"
                   _hover={{ color: "#84c225" }}
-                  onChange={handleFilterWeight}
+                  onChange={handleFilterPriceRange}
                 >
                   Rs 201 to Rs 500
                 </Checkbox>
@@ -250,13 +154,15 @@ const FilterSection = ({ handleFilterFunctionality }) => {
                   colorScheme={"whatsapp"}
                   value="more than 500"
                   _hover={{ color: "#84c225" }}
-                  onChange={handleFilterWeight}
+                  onChange={handleFilterPriceRange}
                 >
                   more than 500
                 </Checkbox>
               </Stack>
             </CheckboxGroup>
           </FormControl>
+
+          {/* OPTINOS FOR FILTER BY dISCOUNTS  */}
           <FormControl as="fieldset">
             <FormLabel as="legend">Discount</FormLabel>
             <Divider borderColor={"#acb0b9"} />
@@ -288,62 +194,6 @@ const FilterSection = ({ handleFilterFunctionality }) => {
                   onChange={handleFilterDiscount}
                 >
                   More than 25%
-                </Checkbox>
-              </Stack>
-            </CheckboxGroup>
-          </FormControl>
-          <FormControl as="fieldset">
-            <FormLabel as="legend">Pack Size</FormLabel>
-            <Divider borderColor={"#acb0b9"} />
-            <CheckboxGroup>
-              <Stack spacing="1" p={2} fontWeight="350">
-                <Checkbox
-                  value="100 - 125 g"
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  _hover={{ color: "#84c225" }}
-                >
-                  100 - 125 g
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="125 - 200 g"
-                  _hover={{ color: "#84c225" }}
-                >
-                  125 - 200 g
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="150 - 200 g"
-                  _hover={{ color: "#84c225" }}
-                >
-                  150 - 200 g
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="100 to 150 g"
-                  _hover={{ color: "#84c225" }}
-                >
-                  100 to 150 g
-                </Checkbox>
-                <Checkbox
-                  borderColor="#58595b"
-                  colorScheme={"whatsapp"}
-                  value="40 cm"
-                  _hover={{ color: "#84c225" }}
-                >
-                  40 cm
-                </Checkbox>
-                <Checkbox
-                  borderColor="#67686b"
-                  colorScheme={"whatsapp"}
-                  value="More than Rs 501 "
-                  _hover={{ color: "#84c225" }}
-                >
-                  More than Rs 501
                 </Checkbox>
               </Stack>
             </CheckboxGroup>

@@ -8,6 +8,9 @@ import axios from "axios";
 import { ProductGrid } from "@/components/products/Cards/ProductGrid";
 import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
+import Pagination from "@/components/products/Pagination/Pagination";
+
+
 const FruitsAndVegetables = () => {
   let [data, setdata] = useState([]);
   let [allData, setAllData] = useState([]);
@@ -20,26 +23,15 @@ const FruitsAndVegetables = () => {
     );
   };
 
-  // const getFilterData=()=>{
-  //    return axios.get(
-  //      `https://digibasket.onrender.com/fruits-vegetables??title=${[...filterData]}`
-  //    );
-  // }
-
   useEffect(() => {
     getData(sort).then((res) => {
       let updated = res.data.filter((el) => el.active);
       setdata(updated);
       setAllData(updated);
     });
-    //  getFilterData(filterData).then((res) => {
-    //    let updated = res.data.filter((el) => el.active);
-    //    setdata(updated);
-    //  });
   }, [sort, sortOrder]);
 
   const handleSortFunctionality = (val) => {
-    console.log(val);
     if (val === "Low to High") {
       setSort("price");
       setsortOrder("asc");
@@ -68,7 +60,7 @@ const FruitsAndVegetables = () => {
   };
 
   const handleFilterFunctionality = (val, status) => {
-    console.log(val, status);
+    //BRAND WISE FILTER
     if (val === "Fresho" && status === true) {
       let filteredData = allData.filter((el) => el.brand === "Fresho");
       setdata(filteredData);
@@ -79,7 +71,7 @@ const FruitsAndVegetables = () => {
       setdata(filteredData);
     } else if (val === "Gopalan Organic" && status === false) {
       setdata(allData);
-      // PRICE RANGE FILTER
+ 
     } else if (val === "Organic" && status === true) {
       let filteredData = allData.filter((el) => el.brand === "Organic");
       setdata(filteredData);
@@ -154,16 +146,23 @@ const FruitsAndVegetables = () => {
         <Flex>
           <Stack width={"300px"}>
             <FilterSection
+              //  handleFilterFunctionality WILL BRING STATUS OF CHECKBOX  AND VALUE TO FILTER
+
               handleFilterFunctionality={handleFilterFunctionality}
             />
           </Stack>
 
           <Stack width={"full"} borderLeft={"1px solid #d6cbbf"}>
             <ProductSectionTop
+              // PROPS WILL DISPLAY CATEGORY AND NUMBER OF PRODUCT
               props={`Fruits & Vegetables ${data.length}`}
+              //  handleSortFunctionality WILL BRING OPTION VALUE OF SELECT TAG AND TYPE TO SORT
+
               handleSortFunctionality={handleSortFunctionality}
             />
             <Box pl={2}>
+              {/* -------------SEND DATA TO PRODUCT GRID FOR RENDRING----------------------- */}
+
               <ProductGrid>
                 {data.map((product) => (
                   <Cards
@@ -177,6 +176,7 @@ const FruitsAndVegetables = () => {
           </Stack>
         </Flex>
       </Box>
+      <Pagination />
     </Box>
   );
 };

@@ -8,8 +8,14 @@ import Cards from "@/components/products/Cards/Cards";
 import axios from "axios";
 import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
+import Pagination from "@/components/products/Pagination/Pagination";
+
+//foodgrains-oil-masala category page
 const FoodgrainsOilMasala = () => {
+  //this data will change according to filter and sort
   let [data, setdata] = useState([]);
+  // this ALLdATA will keep all data fetched it will not change on filter or sorting
+  // i.e for rendring all data
   let [allData, setAllData] = useState([]);
   const [sort, setSort] = useState(null);
   const [sortOrder, setsortOrder] = useState("asc");
@@ -21,18 +27,15 @@ const FoodgrainsOilMasala = () => {
 
   useEffect(() => {
     getData(sort).then((res) => {
+      //fetching only active data in backend
       let updated = res.data.filter((el) => el.active);
       setdata(updated);
       setAllData(updated);
     });
   }, [sort, sortOrder]);
 
-  const handleBrand = () => {
-    data.filter((el) => {});
-  };
-
+  // This is handling sort functionality by different select tag
   const handleSortFunctionality = (val) => {
-    console.log(val);
     if (val === "Low to High") {
       setSort("price");
       setsortOrder("asc");
@@ -60,8 +63,9 @@ const FoodgrainsOilMasala = () => {
     }
   };
 
+  // This is handling filter functionality accroding to checkbox input
   const handleFilterFunctionality = (val, status) => {
-    console.log(val, status);
+    //BRAND WISE FILTER
     if (val === "Fresho" && status === true) {
       let filteredData = allData.filter((el) => el.brand === "Fresho");
       setdata(filteredData);
@@ -72,7 +76,7 @@ const FoodgrainsOilMasala = () => {
       setdata(filteredData);
     } else if (val === "Gopalan Organic" && status === false) {
       setdata(allData);
-      // PRICE RANGE FILTER
+   
     } else if (val === "Organic" && status === true) {
       let filteredData = allData.filter((el) => el.brand === "Organic");
       setdata(filteredData);
@@ -146,16 +150,23 @@ const FoodgrainsOilMasala = () => {
         <Flex>
           <Stack width={"300px"}>
             <FilterSection
+              //  handleFilterFunctionality WILL BRING STATUS OF CHECKBOX  AND VALUE TO FILTER
+
               handleFilterFunctionality={handleFilterFunctionality}
             />
           </Stack>
 
           <Stack width={"full"} borderLeft={"1px solid #d6cbbf"}>
             <ProductSectionTop
+              // PROPS WILL DISPLAY CATEGORY AND NUMBER OF PRODUCT
               props={`Foodgrains, Oil & Masala ${data.length}`}
+              //  handleSortFunctionality WILL BRING OPTION VALUE OF SELECT TAG AND TYPE TO SORT
+
               handleSortFunctionality={handleSortFunctionality}
             />
             <Box>
+              {/* -------------SEND DATA TO PRODUCT GRID FOR RENDRING----------------------- */}
+
               <ProductGrid>
                 {data.map((product) => (
                   <Cards
@@ -169,6 +180,7 @@ const FoodgrainsOilMasala = () => {
           </Stack>
         </Flex>
       </Box>
+      <Pagination/>
     </Box>
   );
 };
