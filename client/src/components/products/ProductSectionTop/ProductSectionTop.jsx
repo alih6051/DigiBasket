@@ -43,7 +43,6 @@ const ProductSectionTop = ({ props, handleSortFunctionality }) => {
           <option value="Rupee saving-High to Low">
             Rupee saving-High to Low
           </option>
-          <option value="% Off">% Off-High to Low</option>
         </Select>
       </HStack>
       <HStack pl={6}>

@@ -13,7 +13,7 @@ import {
   InputLeftAddon,
   Input,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaCertificate,
   FaCaretDown,
@@ -24,19 +24,31 @@ import {
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
 import { useToast } from "@chakra-ui/react";
-
-export default function Cards({ data, cateicons }) {
-  const { discount, image, title, rate, id, brand, price } = data;
-  const [togglePrice, setTogglePrice] = useState(price);
+import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
+//  cateicons={CateIcons.veg}
+export default function Cards({ data }) {
+  const { discount, image, title, category, id, brand, price } = data;
+  const [togglePrice, setTogglePrice] = useState(null);
+//let togglePrice = price
   const [toggleStrikePrice, setToggleStrikePrice] = useState(
     (Math.random() * (2 - 1) + 1) * price
   );
   const [Quantity, setQuantity] = useState(1);
-
   const dispatch = useDispatch();
 
   const toast = useToast()
 
+useEffect(()=>{
+setTogglePrice(price)
+},[data])
+
+  let cateicons;
+if (category == "eggs-meat-fish") {
+
+  cateicons=CateIcons.nonveg
+}else if (category == "foodgrains-oil-masala" || category == "fruits-vegetables") {
+ cateicons = CateIcons.veg;
+}
   const handleChange = (e) => {
     setTogglePrice(e.target.value);
 
@@ -131,7 +143,7 @@ export default function Cards({ data, cateicons }) {
               colorScheme={"#8a8076"}
               focusBorderColor={"#8a8076"}
               icon={<FaCaretDown border="1px solid #8a8076" />}
-              value={togglePrice}
+              // value={togglePrice}
               onChange={handleChange}
             >
               <option size="xs" value={price}>
@@ -141,7 +153,7 @@ export default function Cards({ data, cateicons }) {
                 {500} g - Rs {price * 2 - 15}
               </option>
               <option size="xs" value={price * 3 - 15}>
-                {1} kg - Rs {price * 3 - 25}
+                {1} kg - Rs {Math.floor(price * 3 - 25)}
               </option>
             </Select>
             <Stack bg={"#f4f3f2"} p="5px" pb={"10px"}>
