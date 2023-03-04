@@ -10,13 +10,8 @@
 <p>/api/users/register => FOR REGISTERING NEW USER></p>
 <p>/api/users/login => FOR USER LOGIN</p>
 
-<h2>CATEGORY</h2>
-<p>photography</p>
-<p>computer</p>
-<p>gaming</p>
-<p>drone</p>
 <p>video</p>
 
-<h1>https://taupe-raven-gear.cyclic.app</h1>
+<h1>https://ill-puce-bunny-cape.cyclic.app</h1>
 
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2M2Y1ZTdiNmRjOWEwZjlhYzU5MGUxYzMiLCJpYXQiOjE2NzcxNjM0MDh9.-zI86Ke2tOJbtZB_yReF8d5SCKQ8378pu_c013-Rk8g
