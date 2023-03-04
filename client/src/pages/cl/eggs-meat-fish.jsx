@@ -5,46 +5,61 @@ import FilterSection from "@/components/products/FilterSidebar/FilterSection";
 import { ProductGrid } from "@/components/products/Cards/ProductGrid";
 import Cards from "@/components/products/Cards/Cards";
 import axios from "axios";
-import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
+
 import { useEffect, useState } from "react";
 import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
 import Pagination from "@/components/products/Pagination/Pagination";
+import Loader from "@/components/products/Loader/Loader";
 
 //Eggs, Meat and Fish category page
 const EggsMeatFish = () => {
   let [data, setdata] = useState([]);
   //this data will change according to filter and sort
 
-  let [allData, setAllData] = useState([]);  // this will keep all data fetched it will not change on filter or sorting
-  // i.e for rendring all data 
-  const [sort, setSort] = useState(null);
+  let [allData, setAllData] = useState([]); // this will keep all data fetched it will not change on filter or sorting
+  // i.e for rendring all data
+  const [sort, setSort] = useState("price");
   const [sortOrder, setsortOrder] = useState("asc");
+const [totalPages, setTotalPages] = useState(1)
+const [totalProduct, setTotalProduct] = useState(0)
+const [page, setPage]= useState(1)
+const [loader, setLoader] = useState(false)
+
   const getData = () => {
+
     return axios.get(
-      `https://digibasket.onrender.com/eggs-meat-fish?_sort=${sort}&_order=${sortOrder}`
+      `https://ill-puce-bunny-cape.cyclic.app/api/products/?category=eggs-meat-fish&price=${sortOrder}&page=${page}&limit=12`
     );
   };
-
   useEffect(() => {
-    getData(sort).then((res) => {
+    setLoader(true);
+    getData(sort,page).then((res) => {
       //fetching only active data in backend
-      let updated = res.data.filter((el) => el.active);
+      let updated = res.data.data.filter((el) => el.active);
+       setLoader(false);
+      setTotalPages(res.data.totalPages);
+      setTotalProduct(res.data.totalItems);
       setdata(updated);
       setAllData(updated);
     });
-  }, [sort, sortOrder]);
+  }, [sort, sortOrder,page]);
+
+  const handlePage = (val)=>{
+setPage(page+val)
+  }
+
 
   // This is handling sort functionality by different select tag
   const handleSortFunctionality = (val) => {
-   
     if (val === "Low to High") {
       setSort("price");
       setsortOrder("asc");
-      getData(sort);
+        getData(sort);
     } else if (val === "High to Low") {
       setSort("price");
+
       setsortOrder("desc");
-      getData(sort);
+        getData(sort);
     } else if (val === "Alphabetical") {
       setSort("title");
       setsortOrder("asc");
@@ -64,7 +79,6 @@ const EggsMeatFish = () => {
     }
   };
 
-
   // This is handling filter functionality accroding to checkbox input
   const handleFilterFunctionality = (val, status) => {
     //BRAND WISE FILTER
@@ -78,7 +92,6 @@ const EggsMeatFish = () => {
       setdata(filteredData);
     } else if (val === "Organic" && status === false) {
       setdata(allData);
-    
     } else if (val === "Gopalan Organic" && status === true) {
       let filteredData = allData.filter((el) => el.brand === "Gopalan Organic");
       setdata(filteredData);
@@ -145,6 +158,7 @@ const EggsMeatFish = () => {
     }
   };
 
+
   return (
     <Box maxW="6xl" m={"auto"}>
       <Carousels cards={eggsMeatsFish} />
@@ -157,30 +171,29 @@ const EggsMeatFish = () => {
               handleFilterFunctionality={handleFilterFunctionality}
             />
           </Stack>
-
-          <Stack width={"full"} borderLeft={"1px solid #d6cbbf"}>
-            <ProductSectionTop
-              // PROPS WILL DISPLAY CATEGORY AND NUMBER OF PRODUCT
-              props={`Egg, Meat & Fish (${data.length})`}
-              //  handleSortFunctionality WILL BRING OPTION VALUE OF SELECT TAG AND TYPE TO SORT
-              handleSortFunctionality={handleSortFunctionality}
-            />
-            <Box pl={1}>
-              {/* -------------SEND DATA TO PRODUCT GRID FOR RENDRING----------------------- */}
-              <ProductGrid>
-                {data.map((product) => (
-                  <Cards
-                    key={product.id}
-                    data={product}
-                    cateicons={CateIcons.veg}
-                  />
-                ))}
-              </ProductGrid>
-            </Box>
-          </Stack>
+          {loader && loader ? (
+            <Loader />
+          ) : (
+            <Stack width={"full"} borderLeft={"1px solid #d6cbbf"}>
+              <ProductSectionTop
+                // PROPS WILL DISPLAY CATEGORY AND NUMBER OF PRODUCT
+                props={`Egg, Meat & Fish (${totalProduct})`}
+                //  handleSortFunctionality WILL BRING OPTION VALUE OF SELECT TAG AND TYPE TO SORT
+                handleSortFunctionality={handleSortFunctionality}
+              />
+              <Box pl={1}>
+                {/* -------------SEND DATA TO PRODUCT GRID FOR RENDRING----------------------- */}
+                <ProductGrid>
+                  {data.map((product) => (
+                    <Cards key={product.id} data={product} />
+                  ))}
+                </ProductGrid>
+              </Box>
+            </Stack>
+          )}
         </Flex>
       </Box>
-      <Pagination />
+      <Pagination page={totalPages} handlePage={handlePage} />
     </Box>
   );
 };

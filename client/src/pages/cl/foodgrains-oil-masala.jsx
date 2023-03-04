@@ -9,41 +9,51 @@ import axios from "axios";
 import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 import ProductSectionTop from "@/components/products/ProductSectionTop/ProductSectionTop";
 import Pagination from "@/components/products/Pagination/Pagination";
+import Loader from "@/components/products/Loader/Loader";
 
 //foodgrains-oil-masala category page
 const FoodgrainsOilMasala = () => {
   //this data will change according to filter and sort
   let [data, setdata] = useState([]);
+   let [allData, setAllData] = useState([]); 
   // this ALLdATA will keep all data fetched it will not change on filter or sorting
   // i.e for rendring all data
-  let [allData, setAllData] = useState([]);
-  const [sort, setSort] = useState(null);
-  const [sortOrder, setsortOrder] = useState("asc");
+ const [sort, setSort] = useState("price");
+ const [sortOrder, setsortOrder] = useState("asc");
+ const [totalPages, setTotalPages] = useState(1);
+ const [totalProduct, setTotalProduct] = useState(0);
+ const [page, setPage] = useState(1);
+ const [loader, setLoader] = useState(false);
   const getData = () => {
     return axios.get(
-      `https://digibasket.onrender.com/foodgrains-oil-masala?_sort=${sort}&_order=${sortOrder}`
+      `https://ill-puce-bunny-cape.cyclic.app/api/products/?category=foodgrains-oil-masala&price=${sortOrder}&page=${page}&limit=12`
     );
   };
 
   useEffect(() => {
+    setLoader(true);
     getData(sort).then((res) => {
       //fetching only active data in backend
-      let updated = res.data.filter((el) => el.active);
-      setdata(updated);
-      setAllData(updated);
+      let updated = res.data.data.filter((el) => el.active);
+       setLoader(false);
+     setTotalPages(res.data.totalPages);
+     setTotalProduct(res.data.totalItems);
+     setdata(updated);
+     setAllData(updated);
     });
-  }, [sort, sortOrder]);
+  }, [sort, sortOrder,page]);
+    const handlePage = (val) => {
+      setPage(page + val);
+    };
 
   // This is handling sort functionality by different select tag
   const handleSortFunctionality = (val) => {
     if (val === "Low to High") {
       setSort("price");
       setsortOrder("asc");
-      getData(sort);
     } else if (val === "High to Low") {
       setSort("price");
       setsortOrder("desc");
-      getData(sort);
     } else if (val === "Alphabetical") {
       setSort("title");
       setsortOrder("asc");
@@ -155,32 +165,35 @@ const FoodgrainsOilMasala = () => {
               handleFilterFunctionality={handleFilterFunctionality}
             />
           </Stack>
+          {loader && loader ? (
+            <Loader />
+          ) : (
+            <Stack width={"full"} borderLeft={"1px solid #d6cbbf"}>
+              <ProductSectionTop
+                // PROPS WILL DISPLAY CATEGORY AND NUMBER OF PRODUCT
+                props={`Foodgrains, Oil & Masala ${totalProduct}`}
+                //  handleSortFunctionality WILL BRING OPTION VALUE OF SELECT TAG AND TYPE TO SORT
 
-          <Stack width={"full"} borderLeft={"1px solid #d6cbbf"}>
-            <ProductSectionTop
-              // PROPS WILL DISPLAY CATEGORY AND NUMBER OF PRODUCT
-              props={`Foodgrains, Oil & Masala ${data.length}`}
-              //  handleSortFunctionality WILL BRING OPTION VALUE OF SELECT TAG AND TYPE TO SORT
+                handleSortFunctionality={handleSortFunctionality}
+              />
+              <Box>
+                {/* -------------SEND DATA TO PRODUCT GRID FOR RENDRING----------------------- */}
 
-              handleSortFunctionality={handleSortFunctionality}
-            />
-            <Box>
-              {/* -------------SEND DATA TO PRODUCT GRID FOR RENDRING----------------------- */}
-
-              <ProductGrid>
-                {data.map((product) => (
-                  <Cards
-                    key={product.id}
-                    data={product}
-                    cateicons={CateIcons.veg}
-                  />
-                ))}
-              </ProductGrid>
-            </Box>
-          </Stack>
+                <ProductGrid>
+                  {data.map((product) => (
+                    <Cards
+                      key={product.id}
+                      data={product}
+                      cateicons={CateIcons.veg}
+                    />
+                  ))}
+                </ProductGrid>
+              </Box>
+            </Stack>
+          )}
         </Flex>
       </Box>
-      <Pagination/>
+      <Pagination page={totalPages} handlePage={handlePage} />
     </Box>
   );
 };

@@ -1,4 +1,5 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, HStack, Heading } from "@chakra-ui/react";
+
 import * as React from "react";
 
 export const ProductGrid = (props) => {
@@ -16,7 +17,7 @@ export const ProductGrid = (props) => {
       lg: Math.min(4, count),
     };
   }, [props.children]);
-
+  
   return (
     <SimpleGrid
       columns={columns}
