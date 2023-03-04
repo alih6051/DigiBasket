@@ -1,14 +1,12 @@
-import { Box, Text } from "@chakra-ui/react";
-import AdminMenu from "Admin-Side/Admin-Menu/AdminMenu";
-
-import React, { useState } from "react";
+import AdminLogin from "@/components/admin/AdminLogin";
+import AdminPanel from "@/components/admin/AdminPanel";
+import React from "react";
+import { useSelector } from "react-redux";
 
 const Admin = () => {
-  return (
-    <Box bg={"#181e2a"}>
-      <AdminMenu />
-    </Box>
-  );
+  const { admin } = useSelector((state) => state.admin);
+
+  return admin ? <AdminPanel /> : <AdminLogin />;
 };
 
 export default Admin;

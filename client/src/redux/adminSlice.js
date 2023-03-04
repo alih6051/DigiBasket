@@ -1,22 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  loading: false,
-  error: false,
-  data: [],
+  admin: null,
 };
 
 export const adminSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {
-    setAdminData: (state, action) => {
-      state.data = action.payload;
+    loginAdmin: (state, action) => {
+      state.admin = action.payload;
+    },
+    logoutAdmin: (state) => {
+      state.admin = null;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAdminData } = adminSlice.actions;
+export const { loginAdmin, logoutAdmin } = adminSlice.actions;
 
 export default adminSlice.reducer;

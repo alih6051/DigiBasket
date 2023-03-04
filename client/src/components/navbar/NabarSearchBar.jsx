@@ -13,14 +13,20 @@ const NabarSearchBar = () => {
   // HANLDE SEARCH
   const handleSearch = () => {
     if (value.length > 0) {
-      router.push(`/search?q=${value}`);
+      router.push({
+        pathname: "/search",
+        query: { q: value },
+      });
       setValue("");
     }
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && value.length > 0) {
-      router.push(`/search?q=${value}`);
+      router.push({
+        pathname: "/search",
+        query: { q: value },
+      });
       setValue("");
     }
   };
