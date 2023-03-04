@@ -4,8 +4,8 @@ import Header from "./Header";
 
 const Customers = () => {
   return (
-    <Box color={"white"} minH={"100vh"} mt={{ base: "60px", md: "0px" }} p={3}>
-      <Header title="Customers" />
+    <Box>
+      <Header title="CUSTOMERS" sub="List of Customers" />
     </Box>
   );
 };
