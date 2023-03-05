@@ -13,7 +13,7 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       let isAdded = false;
       state.data = state.data.map((el) => {
-        if (el.id == action.payload.id) {
+        if (el._id == action.payload._id) {
           isAdded = true;
           return { ...el, quantity: el.quantity + action.payload.quantity };
         } else {
@@ -28,11 +28,11 @@ export const cartSlice = createSlice({
       state.data = action.payload;
     },
     removeItem: (state, action) => {
-      state.data = state.data.filter((el) => el.id != action.payload);
+      state.data = state.data.filter((el) => el._id != action.payload);
     },
     updateQuantity: (state, { payload }) => {
       state.data = state.data.map((el) => {
-        if (el.id == payload.id) {
+        if (el._id == payload._id) {
           return { ...el, quantity: payload.quant };
         } else {
           return el;

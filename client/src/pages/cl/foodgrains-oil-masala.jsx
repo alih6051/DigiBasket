@@ -15,15 +15,15 @@ import Loader from "@/components/products/Loader/Loader";
 const FoodgrainsOilMasala = () => {
   //this data will change according to filter and sort
   let [data, setdata] = useState([]);
-   let [allData, setAllData] = useState([]); 
+  let [allData, setAllData] = useState([]);
   // this ALLdATA will keep all data fetched it will not change on filter or sorting
   // i.e for rendring all data
- const [sort, setSort] = useState("price");
- const [sortOrder, setsortOrder] = useState("asc");
- const [totalPages, setTotalPages] = useState(1);
- const [totalProduct, setTotalProduct] = useState(0);
- const [page, setPage] = useState(1);
- const [loader, setLoader] = useState(false);
+  const [sort, setSort] = useState("price");
+  const [sortOrder, setsortOrder] = useState("asc");
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loader, setLoader] = useState(false);
   const getData = () => {
     return axios.get(
       `https://ill-puce-bunny-cape.cyclic.app/api/products/?category=foodgrains-oil-masala&price=${sortOrder}&page=${page}&limit=12`
@@ -35,16 +35,16 @@ const FoodgrainsOilMasala = () => {
     getData(sort).then((res) => {
       //fetching only active data in backend
       let updated = res.data.data.filter((el) => el.active);
-       setLoader(false);
-     setTotalPages(res.data.totalPages);
-     setTotalProduct(res.data.totalItems);
-     setdata(updated);
-     setAllData(updated);
+      setLoader(false);
+      setTotalPages(res.data.totalPages);
+      setTotalProduct(res.data.totalItems);
+      setdata(updated);
+      setAllData(updated);
     });
-  }, [sort, sortOrder,page]);
-    const handlePage = (val) => {
-      setPage(page + val);
-    };
+  }, [sort, sortOrder, page]);
+  const handlePage = (val) => {
+    setPage(page + val);
+  };
 
   // This is handling sort functionality by different select tag
   const handleSortFunctionality = (val) => {
@@ -86,7 +86,6 @@ const FoodgrainsOilMasala = () => {
       setdata(filteredData);
     } else if (val === "Gopalan Organic" && status === false) {
       setdata(allData);
-   
     } else if (val === "Organic" && status === true) {
       let filteredData = allData.filter((el) => el.brand === "Organic");
       setdata(filteredData);
@@ -182,7 +181,7 @@ const FoodgrainsOilMasala = () => {
                 <ProductGrid>
                   {data.map((product) => (
                     <Cards
-                      key={product.id}
+                      key={product._id}
                       data={product}
                       cateicons={CateIcons.veg}
                     />

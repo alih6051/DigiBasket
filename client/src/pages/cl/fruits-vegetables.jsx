@@ -23,7 +23,7 @@ const FruitsAndVegetables = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalProduct, setTotalProduct] = useState(0);
   const [page, setPage] = useState(1);
-   const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
   const getData = () => {
     return axios.get(
       `https://ill-puce-bunny-cape.cyclic.app/api/products/?category=foodgrains-oil-masala&price=${sortOrder}&page=${page}&limit=12`
@@ -31,11 +31,11 @@ const FruitsAndVegetables = () => {
   };
 
   useEffect(() => {
-    setLoader(true)
+    setLoader(true);
     getData(sort).then((res) => {
       //fetching only active data in backend
       let updated = res.data.data.filter((el) => el.active);
-      setLoader(false)
+      setLoader(false);
       setTotalPages(res.data.totalPages);
       setTotalProduct(res.data.totalItems);
       setdata(updated);
@@ -43,9 +43,7 @@ const FruitsAndVegetables = () => {
     });
   }, [sort, sortOrder, page]);
   const handlePage = (val) => {
-  
     setPage(page + val);
-    
   };
 
   // This is handling sort functionality by different select tag
@@ -183,7 +181,7 @@ const FruitsAndVegetables = () => {
                 <ProductGrid>
                   {data.map((product) => (
                     <Cards
-                      key={product.id}
+                      key={product._id}
                       data={product}
                       cateicons={CateIcons.veg}
                     />

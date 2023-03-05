@@ -27,28 +27,29 @@ import { useToast } from "@chakra-ui/react";
 import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 //  cateicons={CateIcons.veg}
 export default function Cards({ data }) {
-  const { discount, image, title, category, id, brand, price } = data;
+  const { discount, image, title, category, _id, brand, price } = data;
   const [togglePrice, setTogglePrice] = useState(null);
-//let togglePrice = price
   const [toggleStrikePrice, setToggleStrikePrice] = useState(
     (Math.random() * (2 - 1) + 1) * price
   );
   const [Quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
-  const toast = useToast()
+  const toast = useToast();
 
-useEffect(()=>{
-setTogglePrice(price)
-},[data])
+  useEffect(() => {
+    setTogglePrice(price);
+  }, [data]);
 
   let cateicons;
-if (category == "eggs-meat-fish") {
-
-  cateicons=CateIcons.nonveg
-}else if (category == "foodgrains-oil-masala" || category == "fruits-vegetables") {
- cateicons = CateIcons.veg;
-}
+  if (category == "eggs-meat-fish") {
+    cateicons = CateIcons.nonveg;
+  } else if (
+    category == "foodgrains-oil-masala" ||
+    category == "fruits-vegetables"
+  ) {
+    cateicons = CateIcons.veg;
+  }
   const handleChange = (e) => {
     setTogglePrice(e.target.value);
 
@@ -67,12 +68,12 @@ if (category == "eggs-meat-fish") {
       title: "Added to Cart Succesfully",
       description: `${Quantity} ${title} added to cart`,
       status: "success",
-      duration: 9000,
+      duration: 3000,
       isClosable: true,
     });
   };
 
-  //for showing box shadow on hovering on card 
+  //for showing box shadow on hovering on card
   const [isHovering, setHovering] = useState("");
 
   function handleMouseEnter() {
@@ -219,7 +220,7 @@ if (category == "eggs-meat-fish") {
                   _hover={{ bg: "#e6bf48" }}
                   onClick={() =>
                     handleAddTocart({
-                      id,
+                      _id,
                       discount,
                       image,
                       title,

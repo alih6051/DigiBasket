@@ -19,18 +19,18 @@ export const CartItem = (props) => {
   const cartItems = useSelector((state) => state.cart.data);
   const dispatch = useDispatch();
 
-  const handleRemove = (id) => {
-    dispatch(removeItem(id));
+  const handleRemove = (_id) => {
+    dispatch(removeItem(_id));
   };
 
-  const handleQuantityUpdate = (id, quant) => {
-    dispatch(updateQuantity({ id, quant }));
+  const handleQuantityUpdate = (_id, quant) => {
+    dispatch(updateQuantity({ _id, quant }));
   };
 
   const {
     isGiftWrapping,
     title,
-    id,
+    _id,
     description,
     quantity,
     image,
@@ -68,7 +68,7 @@ export const CartItem = (props) => {
           width={20}
           onChange={(e) => {
             setQuant(+e.target.value);
-            handleQuantityUpdate(id, +e.target.value);
+            handleQuantityUpdate(_id, +e.target.value);
           }}
         >
           <option value="1"> 1</option>
@@ -83,7 +83,7 @@ export const CartItem = (props) => {
         <PriceTag price={price} />
         <CloseButton
           aria-label={`Delete ${title} from cart`}
-          onClick={() => handleRemove(id)}
+          onClick={() => handleRemove(_id)}
         />
       </Flex>
 
@@ -98,7 +98,7 @@ export const CartItem = (props) => {
           md: "none",
         }}
       >
-        <Button fontSize="sm" onClick={() => handleRemove(id)}>
+        <Button fontSize="sm" onClick={() => handleRemove(_id)}>
           Delete
         </Button>
         <Select
@@ -107,7 +107,7 @@ export const CartItem = (props) => {
           width={20}
           onChange={(e) => {
             setQuant(+e.target.value);
-            handleQuantityUpdate(id, +e.target.value);
+            handleQuantityUpdate(_id, +e.target.value);
           }}
         >
           <option value="1"> 1</option>

@@ -43,6 +43,7 @@ import {
   createUserSuccess,
   authReset,
 } from "@/redux/authSlice";
+import UserProfile from "./UserProfile";
 
 const NavbarAccount = () => {
   // Redux action
@@ -58,6 +59,7 @@ const NavbarAccount = () => {
   const [signUpData, setSignUpData] = useState({
     name: "",
     email: "",
+    avatar_url: "",
     password: "",
   });
   const [loading, setLoading] = useState(false);
@@ -73,8 +75,9 @@ const NavbarAccount = () => {
   };
 
   const handleLoginUser = () => {
+    setLoading(true);
     axios
-      .post("https://enthusiastic-pink-scrubs.cyclic.app/login", loginData)
+      .post("https://ill-puce-bunny-cape.cyclic.app/api/users/login", loginData)
       .then(({ data }) => {
         toast({
           title: data.message,
@@ -83,6 +86,18 @@ const NavbarAccount = () => {
           duration: 5000,
           isClosable: true,
         });
+        setLoading(false);
+        dispatch(
+          authSuccess({
+            token: data.token,
+            user: {
+              name: data.name,
+              email: data.email,
+              avatar_url: data.avatar_url,
+            },
+          })
+        );
+        onClose();
       })
       .catch((err) => {
         toast({
@@ -92,48 +107,61 @@ const NavbarAccount = () => {
           duration: 5000,
           isClosable: true,
         });
+        setLoading(false);
+        console.log(err);
       });
   };
 
   const handleCreateUser = () => {
+    setLoading(true);
     axios
-      .post("https://enthusiastic-pink-scrubs.cyclic.app/signup", signUpData)
+      .post(
+        "https://ill-puce-bunny-cape.cyclic.app/api/users/register",
+        signUpData
+      )
       .then((res) => {
         toast({
           title: "Account created.",
           description: "We've created your account for you.",
           status: "success",
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
+        setLoading(false);
       })
       .catch((err) => {
         toast({
-          title: "Email already registered.",
-          description: "Please use another email address.",
+          title: err.response.data.message,
+          description: "You can find the error in console",
           status: "error",
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
+        console.log(err);
+        setLoading(false);
       });
   };
 
   return (
-    <Flex>
-      <Flex
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="end"
-        mr={5}
-        onClick={onOpen}
-        cursor="pointer"
-        _hover={{ textDecoration: "underline" }}
-      >
-        <VscAccount fontSize="24px" />
-        <Text fontSize="xs" mt={0}>
-          Sign In
-        </Text>
-      </Flex>
+    <Flex alignItems={"center"}>
+      {!authState ? (
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="end"
+          mr={5}
+          onClick={onOpen}
+          cursor="pointer"
+          _hover={{ textDecoration: "underline" }}
+        >
+          <VscAccount fontSize="24px" />
+          <Text fontSize="xs" mt={0}>
+            Sign In
+          </Text>
+        </Flex>
+      ) : (
+        <UserProfile />
+      )}
       <Link href="/cart">
         <button style={{ position: "relative" }}>
           <VStack spacing={0} paddingTop="5px">
@@ -233,6 +261,20 @@ const NavbarAccount = () => {
                         }
                       />
                     </FormControl>
+                    <FormControl>
+                      <FormLabel>Avatar</FormLabel>
+                      <Input
+                        value={signUpData.avatar_url}
+                        placeholder="Avatar url"
+                        borderRadius="3px"
+                        onChange={(e) =>
+                          setSignUpData({
+                            ...signUpData,
+                            avatar_url: e.target.value,
+                          })
+                        }
+                      />
+                    </FormControl>
                     <FormControl isRequired>
                       <FormLabel>Email Address</FormLabel>
                       <Input
@@ -243,26 +285,16 @@ const NavbarAccount = () => {
                         onChange={(e) => handleSignUpData(e)}
                       />
                     </FormControl>
-                    <Flex justifyContent="space-between">
-                      <FormControl isRequired w="45%">
-                        <FormLabel>Create Password</FormLabel>
-                        <Input
-                          placeholder="Password"
-                          type="password"
-                          onChange={(e) => handleSignUpData(e)}
-                          value={signUpData.password}
-                          borderRadius="3px"
-                        />
-                      </FormControl>
-                      <FormControl isRequired w="45%">
-                        <FormLabel>Confirm Password</FormLabel>
-                        <Input
-                          placeholder="Confirm Password"
-                          type="password"
-                          borderRadius="3px"
-                        />
-                      </FormControl>
-                    </Flex>
+                    <FormControl isRequired>
+                      <FormLabel>Password</FormLabel>
+                      <Input
+                        placeholder="Password"
+                        type="password"
+                        onChange={(e) => handleSignUpData(e)}
+                        value={signUpData.password}
+                        borderRadius="3px"
+                      />
+                    </FormControl>
 
                     <Button
                       colorScheme="blue"

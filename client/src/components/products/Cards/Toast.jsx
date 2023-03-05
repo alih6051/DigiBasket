@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 
-const ToastExample=({})=> {
+const ToastExample = ({}) => {
   const toast = useToast();
   return (
     <Button
@@ -10,7 +10,7 @@ const ToastExample=({})=> {
           title: "Account created.",
           description: "We've created your account for you.",
           status: "success",
-          duration: 9000,
+          duration: 3000,
           isClosable: true,
         })
       }
@@ -18,5 +18,5 @@ const ToastExample=({})=> {
       Show Toast
     </Button>
   );
-}
+};
 export default ToastExample;

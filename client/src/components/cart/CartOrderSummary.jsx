@@ -5,12 +5,14 @@ import {
   Stack,
   Text,
   useColorModeValue as mode,
+  useToast,
 } from "@chakra-ui/react";
 import * as React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { formatPrice } from "./PriceTag";
 import Link from "next/link";
+import axios from "axios";
 
 const OrderSummaryItem = (props) => {
   const { label, value, children } = props;
@@ -26,9 +28,39 @@ const OrderSummaryItem = (props) => {
 
 export const CartOrderSummary = () => {
   const [total, setTotal] = React.useState(0);
+  const toast = useToast();
 
+  // REDUX
   const { data } = useSelector((state) => state.cart);
-  //console.log(data)
+  const { authState } = useSelector((state) => state.auth);
+
+  const [loading, setLoading] = React.useState(false);
+
+  const handleCheckout = () => {
+    if (authState) {
+      setLoading(true);
+      axios
+        .post(
+          "https://ill-puce-bunny-cape.cyclic.app/api/stripe-create-checkout",
+          data
+        )
+        .then((res) => {
+          setLoading(false);
+          window.location.href = res.data.url;
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    } else {
+      toast({
+        title: "Please Sign In first",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
 
   React.useEffect(() => {
     let totalPrice = 0;
@@ -57,18 +89,19 @@ export const CartOrderSummary = () => {
           </Text>
         </Flex>
       </Stack>
-      <Link href="/checkout">
-        <Button
-          w="100%"
-          bg={"#91c81f"}
-          color="white"
-          size="lg"
-          fontSize="md"
-          rightIcon={<FaArrowRight />}
-        >
-          Checkout
-        </Button>
-      </Link>
+      <Button
+        w="100%"
+        bg={"#91c81f"}
+        color="white"
+        size="lg"
+        fontSize="md"
+        onClick={handleCheckout}
+        rightIcon={<FaArrowRight />}
+        isLoading={loading}
+        loadingText="Processing"
+      >
+        Checkout
+      </Button>
     </Stack>
   );
 };
