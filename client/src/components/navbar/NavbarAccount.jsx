@@ -44,6 +44,7 @@ import {
   authReset,
 } from "@/redux/authSlice";
 import UserProfile from "./UserProfile";
+import { GrUserAdmin } from "react-icons/gr";
 
 const NavbarAccount = () => {
   // Redux action
@@ -311,7 +312,13 @@ const NavbarAccount = () => {
               </TabPanels>
             </Tabs>
           </ModalBody>
-          <ModalFooter></ModalFooter>
+          <ModalFooter>
+            <Link href="/admin">
+              <Button variant={"ghost"} leftIcon={<GrUserAdmin />}>
+                Admin Login
+              </Button>
+            </Link>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </Flex>
