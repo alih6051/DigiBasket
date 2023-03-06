@@ -20,7 +20,9 @@ Link of our deployed project: https://digibasket.vercel.app/
 - Next JS
 - Redux Toolkit
 - Chakra UI
-- Json-Server
+- Mongo DB
+- Express JS
+- Node JS
 
 ## Pages and features
 - Home Page:- Navigation Bar, Footer.
