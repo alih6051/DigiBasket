@@ -34,6 +34,7 @@ ProductRouter.get("/", async (req, res) => {
     res.send({
       data: products,
       totalPages: Math.ceil(totalProducts / limit),
+      totalItems: totalProducts
     });
   } catch (error) {
     console.log(error);
@@ -80,6 +81,7 @@ ProductRouter.get("/search", async (req, res) => {
     res.send({
       data: products,
       totalPages: Math.ceil(totalProducts / limit),
+      totalItems: totalProducts
     });
   } catch (error) {
     console.log(error);

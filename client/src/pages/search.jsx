@@ -10,7 +10,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Cards from "@/components/products/Cards/Cards";
-import { CateIcons } from "@/assets/cl/eggs-meats-fish/eggsMeatsFish";
 import Loader from "@/components/search/Loader";
 import Pagination from "@/components/search/Pagination";
 
@@ -64,7 +63,7 @@ const Search = () => {
         columnGap={3}
       >
         {data.map((item) => (
-          <Cards key={item._id} data={item} cateicons={CateIcons} />
+          <Cards key={item._id} data={item} />
         ))}
       </SimpleGrid>
       <Center my={5}>

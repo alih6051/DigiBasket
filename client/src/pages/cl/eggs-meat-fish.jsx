@@ -20,46 +20,44 @@ const EggsMeatFish = () => {
   // i.e for rendring all data
   const [sort, setSort] = useState("price");
   const [sortOrder, setsortOrder] = useState("asc");
-const [totalPages, setTotalPages] = useState(1)
-const [totalProduct, setTotalProduct] = useState(0)
-const [page, setPage]= useState(1)
-const [loader, setLoader] = useState(false)
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loader, setLoader] = useState(false);
 
   const getData = () => {
-
     return axios.get(
       `https://ill-puce-bunny-cape.cyclic.app/api/products/?category=eggs-meat-fish&price=${sortOrder}&page=${page}&limit=12`
     );
   };
   useEffect(() => {
     setLoader(true);
-    getData(sort,page).then((res) => {
+    getData(sort, page).then((res) => {
       //fetching only active data in backend
       let updated = res.data.data.filter((el) => el.active);
-       setLoader(false);
+      setLoader(false);
       setTotalPages(res.data.totalPages);
       setTotalProduct(res.data.totalItems);
       setdata(updated);
       setAllData(updated);
     });
-  }, [sort, sortOrder,page]);
+  }, [sort, sortOrder, page]);
 
-  const handlePage = (val)=>{
-setPage(page+val)
-  }
-
+  const handlePage = (val) => {
+    setPage(page + val);
+  };
 
   // This is handling sort functionality by different select tag
   const handleSortFunctionality = (val) => {
     if (val === "Low to High") {
       setSort("price");
       setsortOrder("asc");
-        getData(sort);
+      getData(sort);
     } else if (val === "High to Low") {
       setSort("price");
 
       setsortOrder("desc");
-        getData(sort);
+      getData(sort);
     } else if (val === "Alphabetical") {
       setSort("title");
       setsortOrder("asc");
@@ -158,7 +156,6 @@ setPage(page+val)
     }
   };
 
-
   return (
     <Box maxW="6xl" m={"auto"}>
       <Carousels cards={eggsMeatsFish} />
@@ -185,7 +182,7 @@ setPage(page+val)
                 {/* -------------SEND DATA TO PRODUCT GRID FOR RENDRING----------------------- */}
                 <ProductGrid>
                   {data.map((product) => (
-                    <Cards key={product.id} data={product} />
+                    <Cards key={product._id} data={product} />
                   ))}
                 </ProductGrid>
               </Box>

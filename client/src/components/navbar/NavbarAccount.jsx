@@ -31,7 +31,7 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { VscAccount } from "react-icons/vsc";
 import { BsCart } from "react-icons/bs";
 import axios from "axios";
@@ -43,12 +43,12 @@ import {
   createUserSuccess,
   authReset,
 } from "@/redux/authSlice";
+import UserProfile from "./UserProfile";
+import { GrUserAdmin } from "react-icons/gr";
 
 const NavbarAccount = () => {
   // Redux action
-  const { loading, error, authState, token, user } = useSelector(
-    (state) => state.auth
-  );
+  const { authState, token, user } = useSelector((state) => state.auth);
 
   const { data } = useSelector((state) => state.cart);
 
@@ -60,8 +60,10 @@ const NavbarAccount = () => {
   const [signUpData, setSignUpData] = useState({
     name: "",
     email: "",
+    avatar_url: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -73,26 +75,10 @@ const NavbarAccount = () => {
     setSignUpData({ ...signUpData, [e.target.type]: e.target.value });
   };
 
-  const loginWithToken = (token) => {
-    axios
-      .get("https://enthusiastic-pink-scrubs.cyclic.app/getProfile", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        // console.log(res.data[0]);
-        dispatch(authSuccess({ user: res.data[0], token: token }));
-        onClose();
-      })
-      .catch((err) => console.log(err));
-  };
-
   const handleLoginUser = () => {
-    dispatch(authLoading());
+    setLoading(true);
     axios
-      .post("https://enthusiastic-pink-scrubs.cyclic.app/login", loginData)
+      .post("https://ill-puce-bunny-cape.cyclic.app/api/users/login", loginData)
       .then(({ data }) => {
         toast({
           title: data.message,
@@ -101,7 +87,27 @@ const NavbarAccount = () => {
           duration: 5000,
           isClosable: true,
         });
-        loginWithToken(data.token);
+        setLoading(false);
+        dispatch(
+          authSuccess({
+            token: data.token,
+            user: {
+              name: data.name,
+              email: data.email,
+              avatar_url: data.avatar_url,
+            },
+          })
+        );
+        sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify({
+            name: data.name,
+            email: data.email,
+            avatar_url: data.avatar_url,
+          })
+        );
+        onClose();
       })
       .catch((err) => {
         toast({
@@ -111,52 +117,70 @@ const NavbarAccount = () => {
           duration: 5000,
           isClosable: true,
         });
-        dispatch(authError());
+        setLoading(false);
+        console.log(err);
       });
   };
 
   const handleCreateUser = () => {
-    // setLoading(true);
-    dispatch(authLoading());
+    setLoading(true);
     axios
-      .post("https://enthusiastic-pink-scrubs.cyclic.app/signup", signUpData)
+      .post(
+        "https://ill-puce-bunny-cape.cyclic.app/api/users/register",
+        signUpData
+      )
       .then((res) => {
         toast({
           title: "Account created.",
           description: "We've created your account for you.",
           status: "success",
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
-        dispatch(createUserSuccess());
+        setLoading(false);
       })
       .catch((err) => {
         toast({
-          title: "Email already registered.",
-          description: "Please use another email address.",
+          title: err.response.data.message,
+          description: "You can find the error in console",
           status: "error",
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
-        dispatch(authError());
+        console.log(err);
+        setLoading(false);
       });
   };
 
+  useEffect(() => {
+    let token = sessionStorage.getItem("token");
+    let user = JSON.parse(sessionStorage.getItem("user"));
+
+    if (token && user) {
+      dispatch(authSuccess({ token, user }));
+    }
+  }, []);
+
   return (
-    <Flex>
-      <Flex
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="end"
-        mr={5}
-        onClick={onOpen}
-        cursor="pointer"
-      >
-        <VscAccount fontSize="24px" />
-        <Text fontSize="xs" mt={0}>
-          {user.name || "Account"}
-        </Text>
-      </Flex>
+    <Flex alignItems={"center"}>
+      {!authState ? (
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="end"
+          mr={5}
+          onClick={onOpen}
+          cursor="pointer"
+          _hover={{ textDecoration: "underline" }}
+        >
+          <VscAccount fontSize="24px" />
+          <Text fontSize="xs" mt={0}>
+            Sign In
+          </Text>
+        </Flex>
+      ) : (
+        <UserProfile />
+      )}
       <Link href="/cart">
         <button style={{ position: "relative" }}>
           <VStack spacing={0} paddingTop="5px">
@@ -185,7 +209,12 @@ const NavbarAccount = () => {
       </Link>
 
       {/* Account Modal */}
-      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+      <Modal
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+        motionPreset="slideInBottom"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign={"center"}>
@@ -193,139 +222,120 @@ const NavbarAccount = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {authState ? (
-              <VStack spacing={5}>
-                <Avatar
-                  name={user.name}
-                  src="https://bit.ly/broken-link"
-                  size="xl"
-                />
-                <Text>{user.name}</Text>
-                <Text>{user.email}</Text>
-                <Button
-                  w="100%"
-                  colorScheme="red"
-                  isLoading={loading}
-                  loadingText="Logging In"
-                  onClick={() => {
-                    dispatch(authLoading());
-                    setTimeout(() => {
-                      dispatch(authReset());
-                      onClose();
-                    }, 1000);
-                  }}
-                >
-                  Logout
-                </Button>
-              </VStack>
-            ) : (
-              <Tabs isLazy colorScheme={"gray"}>
-                <TabList>
-                  <Tab>LOGIN</Tab>
-                  <Tab>SIGN UP</Tab>
-                </TabList>
-                <TabPanels>
-                  <TabPanel>
-                    <VStack paddingY="20px" spacing={5}>
-                      <FormControl isRequired>
-                        <FormLabel>Email Address</FormLabel>
-                        <Input
-                          placeholder="Email"
-                          type="email"
-                          borderRadius="3px"
-                          value={loginData.email}
-                          onChange={(e) => handleLoginDataChange(e)}
-                        />
-                      </FormControl>
-                      <FormControl isRequired>
-                        <FormLabel>Password</FormLabel>
-                        <Input
-                          placeholder="Password"
-                          type="password"
-                          borderRadius="3px"
-                          value={loginData.password}
-                          onChange={(e) => handleLoginDataChange(e)}
-                        />
-                      </FormControl>
-                      <Button
-                        colorScheme="green"
-                        variant="solid"
-                        size="md"
-                        width="100%"
+            <Tabs isLazy colorScheme={"gray"}>
+              <TabList>
+                <Tab>LOGIN</Tab>
+                <Tab>SIGN UP</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <VStack paddingY="20px" spacing={5}>
+                    <FormControl isRequired>
+                      <FormLabel>Email Address</FormLabel>
+                      <Input
+                        placeholder="Email"
+                        type="email"
                         borderRadius="3px"
-                        isLoading={loading}
-                        loadingText="Logging In"
-                        onClick={handleLoginUser}
-                      >
-                        Sign In
-                      </Button>
-                    </VStack>
-                  </TabPanel>
-                  <TabPanel>
-                    <VStack paddingY="20px" align="left" spacing={5}>
-                      <FormControl isRequired>
-                        <FormLabel>Name</FormLabel>
-                        <Input
-                          value={signUpData.name}
-                          placeholder="Name"
-                          borderRadius="3px"
-                          onChange={(e) =>
-                            setSignUpData({
-                              ...signUpData,
-                              name: e.target.value,
-                            })
-                          }
-                        />
-                      </FormControl>
-                      <FormControl isRequired>
-                        <FormLabel>Email Address</FormLabel>
-                        <Input
-                          placeholder="Email"
-                          borderRadius="3px"
-                          type="email"
-                          value={signUpData.email}
-                          onChange={(e) => handleSignUpData(e)}
-                        />
-                      </FormControl>
-                      <Flex justifyContent="space-between">
-                        <FormControl isRequired w="45%">
-                          <FormLabel>Create Password</FormLabel>
-                          <Input
-                            placeholder="Password"
-                            type="password"
-                            onChange={(e) => handleSignUpData(e)}
-                            value={signUpData.password}
-                            borderRadius="3px"
-                          />
-                        </FormControl>
-                        <FormControl isRequired w="45%">
-                          <FormLabel>Confirm Password</FormLabel>
-                          <Input
-                            placeholder="Confirm Password"
-                            type="password"
-                            borderRadius="3px"
-                          />
-                        </FormControl>
-                      </Flex>
+                        value={loginData.email}
+                        onChange={(e) => handleLoginDataChange(e)}
+                      />
+                    </FormControl>
+                    <FormControl isRequired>
+                      <FormLabel>Password</FormLabel>
+                      <Input
+                        placeholder="Password"
+                        type="password"
+                        borderRadius="3px"
+                        value={loginData.password}
+                        onChange={(e) => handleLoginDataChange(e)}
+                      />
+                    </FormControl>
+                    <Button
+                      colorScheme="green"
+                      variant="solid"
+                      size="md"
+                      width="100%"
+                      borderRadius="3px"
+                      isLoading={loading}
+                      loadingText="Logging In"
+                      onClick={handleLoginUser}
+                    >
+                      Sign In
+                    </Button>
+                  </VStack>
+                </TabPanel>
+                <TabPanel>
+                  <VStack paddingY="20px" align="left" spacing={5}>
+                    <FormControl isRequired>
+                      <FormLabel>Name</FormLabel>
+                      <Input
+                        value={signUpData.name}
+                        placeholder="Name"
+                        borderRadius="3px"
+                        onChange={(e) =>
+                          setSignUpData({
+                            ...signUpData,
+                            name: e.target.value,
+                          })
+                        }
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Avatar</FormLabel>
+                      <Input
+                        value={signUpData.avatar_url}
+                        placeholder="Avatar url"
+                        borderRadius="3px"
+                        onChange={(e) =>
+                          setSignUpData({
+                            ...signUpData,
+                            avatar_url: e.target.value,
+                          })
+                        }
+                      />
+                    </FormControl>
+                    <FormControl isRequired>
+                      <FormLabel>Email Address</FormLabel>
+                      <Input
+                        placeholder="Email"
+                        borderRadius="3px"
+                        type="email"
+                        value={signUpData.email}
+                        onChange={(e) => handleSignUpData(e)}
+                      />
+                    </FormControl>
+                    <FormControl isRequired>
+                      <FormLabel>Password</FormLabel>
+                      <Input
+                        placeholder="Password"
+                        type="password"
+                        onChange={(e) => handleSignUpData(e)}
+                        value={signUpData.password}
+                        borderRadius="3px"
+                      />
+                    </FormControl>
 
-                      <Button
-                        colorScheme="blue"
-                        size="md"
-                        borderRadius="3px"
-                        isLoading={loading}
-                        loadingText="Submitting"
-                        onClick={handleCreateUser}
-                      >
-                        Create Account
-                      </Button>
-                    </VStack>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-            )}
+                    <Button
+                      colorScheme="blue"
+                      size="md"
+                      borderRadius="3px"
+                      isLoading={loading}
+                      loadingText="Submitting"
+                      onClick={handleCreateUser}
+                    >
+                      Create Account
+                    </Button>
+                  </VStack>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
+            <Link href="/admin">
+              <Button variant={"ghost"} leftIcon={<GrUserAdmin />}>
+                Admin Login
+              </Button>
+            </Link>
           </ModalFooter>
         </ModalContent>
       </Modal>
