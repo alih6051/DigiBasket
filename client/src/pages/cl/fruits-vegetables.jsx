@@ -26,7 +26,7 @@ const FruitsAndVegetables = () => {
   const [loader, setLoader] = useState(false);
   const getData = () => {
     return axios.get(
-      `https://ill-puce-bunny-cape.cyclic.app/api/products/?category=foodgrains-oil-masala&price=${sortOrder}&page=${page}&limit=12`
+      `https://ill-puce-bunny-cape.cyclic.app/api/products/?category=fruits-vegetables&price=${sortOrder}&page=${page}&limit=12`
     );
   };
 
