@@ -185,7 +185,7 @@ setPage(page+val)
                 {/* -------------SEND DATA TO PRODUCT GRID FOR RENDRING----------------------- */}
                 <ProductGrid>
                   {data.map((product) => (
-                    <Cards key={product.id} data={product} />
+                    <Cards key={product._id} data={product} />
                   ))}
                 </ProductGrid>
               </Box>
