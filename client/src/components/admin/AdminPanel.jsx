@@ -23,7 +23,7 @@ import { logoutAdmin } from "@/redux/adminSlice";
 import Dashboard from "./Dashboard";
 import Products from "./Products";
 import Customers from "./Customers";
-import Orders from "./Orders";
+
 
 const AdminPanel = () => {
   // REDUX
@@ -74,7 +74,6 @@ const AdminPanel = () => {
           <TabList minW={270} borderRight="1px solid #edf2f7">
             <Tab _selected={{ color: "white", bg: "blue.500" }}>Dashboard</Tab>
             <Tab _selected={{ color: "white", bg: "blue.500" }}>Products</Tab>
-            <Tab _selected={{ color: "white", bg: "blue.500" }}>Orders</Tab>
             <Tab _selected={{ color: "white", bg: "blue.500" }}>Customers</Tab>
           </TabList>
 
@@ -84,9 +83,6 @@ const AdminPanel = () => {
             </TabPanel>
             <TabPanel>
               <Products />
-            </TabPanel>
-            <TabPanel>
-              <Orders />
             </TabPanel>
             <TabPanel>
               <Customers />
