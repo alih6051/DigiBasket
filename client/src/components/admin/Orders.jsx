@@ -2,7 +2,6 @@ import { Box, Stack } from "@chakra-ui/react";
 import React from "react";
 import DashBoardRow from "./DashBoardRow";
 import Header from "./Header";
-
 const Orders = () => {
   return (
     <Box>
@@ -14,5 +13,4 @@ const Orders = () => {
     </Box>
   );
 };
-
 export default Orders;
