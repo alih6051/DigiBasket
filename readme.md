@@ -56,3 +56,24 @@ Cart Page
 
 Checkout Page
 ![App Screenshot](https://i.ibb.co/3mg152Y/payment.png)
+
+## API Endpoints :-
+
+<!-- GETTING DATA -->
+
+<p>/api/products => GIVES ALL DATA</p>
+<p>/api/products/:id => GIVES SINGLE PRODUCT DETAIL</p>
+<p>/api/products?category=fruits-vegitables => GIVES DATA WITH CATEGORY FRUITS & VEGITABLES</p>
+<p>/api/products?category=fruits-vegitables&brand=fresho => GIVES DATA WITH CATEGORY FRUITS & VEGITABLESG AND BRAND FRESHO</p>
+
+
+<!-- LOGIN AND REGISTER -->
+
+
+<p>/api/users/register => FOR REGISTERING NEW USER></p>
+<p>/api/users/login => FOR USER LOGIN</p>
+
+<!-- Deployed LINk -->
+Link: https://ill-puce-bunny-cape.cyclic.app/
+
+
