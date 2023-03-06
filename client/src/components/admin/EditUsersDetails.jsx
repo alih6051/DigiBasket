@@ -18,7 +18,6 @@ import { EditIcon } from "@chakra-ui/icons";
 import axios from "axios";
 //item = {{_id:el._id, name:el.name, email:el.email, avatar_url:el.avatar_url}}
 
-
 const EditUsersDetails = ({
   item: { _id, name, email, avatar_url },
   query,
@@ -32,11 +31,9 @@ const EditUsersDetails = ({
   });
   const [loading, setLoading] = useState(false);
   const toast = useToast();
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleUpdate = () => {
     setLoading(true);
     axios
@@ -45,7 +42,6 @@ const EditUsersDetails = ({
         formData
       )
       .then((res) => {
-       
         setLoading(false);
         toast({
           title: `Updated Successfully`,
@@ -69,13 +65,11 @@ const EditUsersDetails = ({
         console.log(err);
       });
   };
-
   return (
     <>
       <Button onClick={onOpen} variant="ghost">
         <EditIcon />
       </Button>
-
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -113,7 +107,6 @@ const EditUsersDetails = ({
               />
             </FormControl>
           </ModalBody>
-
           <ModalFooter>
             <Button
               colorScheme="blue"
@@ -130,5 +123,4 @@ const EditUsersDetails = ({
     </>
   );
 };
-
 export default EditUsersDetails;

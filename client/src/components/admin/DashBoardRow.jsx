@@ -7,22 +7,17 @@ import {
   Tr,
   Th,
   Td,
-
   TableContainer,
   Icon,
   HStack,
   Select,
-
 } from "@chakra-ui/react";
 import { GrView } from "react-icons/gr";
 import { FaCaretDown, FaRegEdit } from "react-icons/fa";
 import { ChevronDownIcon } from '@chakra-ui/icons';
-
 const DashBoardRow = () => {
 const [status, setStatus] = useState("Pending");
 const [order, setOrder] = useState([]);
-
-
 //function to change status on changing select tag
  const handleStatus = (e) => {
    setStatus(e.target.value);

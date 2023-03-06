@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import Chart from "react-apexcharts";
 import React, { useState } from "react";
-
 const DashBoardGraph = () => {
   const [pieChart, setPieChart] = useState({
     series: [44, 55, 13, 43, 22],
@@ -37,5 +36,4 @@ const DashBoardGraph = () => {
     </Box>
   );
 };
-
 export default DashBoardGraph;

@@ -44,13 +44,10 @@ const EditModel = ({
     category,
   });
   const [loading, setLoading] = useState(false);
-
   const toast = useToast();
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleUpdate = () => {
     setLoading(true);
     axios
@@ -82,13 +79,11 @@ const EditModel = ({
         console.log(err);
       });
   };
-
   return (
     <>
       <Button onClick={onOpen} variant="ghost">
         <EditIcon />
       </Button>
-
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
