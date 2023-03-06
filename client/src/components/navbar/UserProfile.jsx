@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
 
 const UserProfile = () => {
   // REDUX
@@ -28,9 +29,18 @@ const UserProfile = () => {
         </MenuButton>
         <MenuList>
           <MenuItem>{user?.email}</MenuItem>
-          <MenuItem>Orders</MenuItem>
           <MenuDivider />
-          <MenuItem onClick={() => dispatch(authReset())}>Sign Out</MenuItem>
+          <MenuItem
+            onClick={() => {
+              sessionStorage.clear();
+              dispatch(authReset());
+            }}
+          >
+            Sign Out
+          </MenuItem>
+          <MenuItem>
+            <Link href="/admin">Admin Login</Link>
+          </MenuItem>
         </MenuList>
       </Menu>
     </Box>

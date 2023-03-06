@@ -31,7 +31,7 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { VscAccount } from "react-icons/vsc";
 import { BsCart } from "react-icons/bs";
 import axios from "axios";
@@ -98,6 +98,15 @@ const NavbarAccount = () => {
             },
           })
         );
+        sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify({
+            name: data.name,
+            email: data.email,
+            avatar_url: data.avatar_url,
+          })
+        );
         onClose();
       })
       .catch((err) => {
@@ -142,6 +151,15 @@ const NavbarAccount = () => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    let token = sessionStorage.getItem("token");
+    let user = JSON.parse(sessionStorage.getItem("user"));
+
+    if (token && user) {
+      dispatch(authSuccess({ token, user }));
+    }
+  }, []);
 
   return (
     <Flex alignItems={"center"}>
