@@ -20,42 +20,40 @@ import { useEffect } from "react";
 import Loader from "../products/Loader/Loader";
 
 const Dashboard = () => {
-const [totalProduct, setTotalProduct] = useState(0)
-const [allProduct, setAllProduct]=useState(0)
-const [allUsers, setAllUsers]= useState(0)
-const [loader, setLoader] = useState(false)
-const [stock, setStock] = useState(0)
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [allProduct, setAllProduct] = useState(0);
+  const [allUsers, setAllUsers] = useState(0);
+  const [loader, setLoader] = useState(false);
+  const [stock, setStock] = useState(0);
 
- const getData = () => {
-  //getting Total Product
-   return axios.get(
-     `https://ill-puce-bunny-cape.cyclic.app/api/products`
-   );
- };
+  const getData = () => {
+    //getting Total Product
+    return axios.get(`https://ill-puce-bunny-cape.cyclic.app/api/products`);
+  };
   const getUsers = () => {
     //getting All users
     return axios.get(`https://ill-puce-bunny-cape.cyclic.app/api/admin/users`);
   };
- useEffect(() => {
-  setLoader(true)
-   getData().then((res) => {
-     //fetching only active data in backend
-     let stock=res.data.data.reduce((acc,el)=>{return acc+el.inventory},0)
-     setStock(stock);
-     let updated = res.data.data.filter((el) => el.active);
-     setTotalProduct(updated.length);
-   
-     setAllProduct(res.data.totalItems);
-   });
-     getUsers().then((res) => {
-       setLoader(false);
-       //fetching All active users 
-       let updated = res.data;
-       setAllUsers(updated.length);
-    
-     });
- },[])
-console.log(stock)
+  useEffect(() => {
+    setLoader(true);
+    getData().then((res) => {
+      //fetching only active data in backend
+      let stock = res.data.data.reduce((acc, el) => {
+        return acc + el.inventory;
+      }, 0);
+      setStock(stock);
+      let updated = res.data.data.filter((el) => el.active);
+      setTotalProduct(updated.length);
+      setAllProduct(res.data.totalItems);
+    });
+    getUsers().then((res) => {
+      setLoader(false);
+      //fetching All active users
+      let updated = res.data;
+      setAllUsers(updated.length);
+    });
+  }, []);
+  console.log(stock);
   return (
     <Box>
       <Header title="DASHBOARD" sub="Welcome to your dashboard" />
@@ -74,7 +72,6 @@ console.log(stock)
           margin="auto"
         >
           {/*----------------------- Dsahboard Status---------------------------------------  */}
-
           <GridItem maxW={250} bgColor="#49720b" height={100} borderRadius={5}>
             <Heading size={"sm"} p={2} color="white">
               Total Active Product
@@ -115,7 +112,6 @@ console.log(stock)
               />
             </HStack>
           </GridItem>
-
           <GridItem maxW={250} bgColor="#9c6576" height={100} borderRadius={5}>
             <Heading size={"sm"} p={2} color="white">
               All Active users
@@ -158,7 +154,6 @@ console.log(stock)
           </GridItem>
         </Grid>
       )}
-
       {/*---------------------------------- Recent order Data-------------------- */}
       <Stack mt="20px">
         <Box>{/* <DashBoardRow /> */}</Box>
