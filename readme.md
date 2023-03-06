@@ -28,9 +28,10 @@ Link of our deployed project: https://digibasket.vercel.app/
 - Account Page:- User authentication using local storage.
 - Product Page:- It has sorting & filtering functionality.
 - Cart Page :- Dyanamic cart
+- Product search
 
 ## Admin Dashboard Login Credentials
-- Userbname :- admin
+- Username :- admin
 - Password :- admin
 
 ## Glimpse and screenshots of our cloned website:
