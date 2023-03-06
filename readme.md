@@ -29,6 +29,7 @@ Link of our deployed project: https://digibasket.vercel.app/
 - Product Page:- It has sorting & filtering functionality.
 - Cart Page :- Dyanamic cart
 - Product search
+- Payment Integration with Stripe
 
 ## Admin Dashboard Login Credentials
 - Username :- admin
