@@ -37,10 +37,10 @@ Link of our deployed project: https://digibasket.vercel.app/
 ## Glimpse and screenshots of our cloned website:
 
 Home Page
-![App Screenshot](https://i.ibb.co/47TVVLw/home.png)
+![App Screenshot](https://i.ibb.co/LYsZ2MY/home.png)
 
 Admin Page
-![App Screenshot](https://i.ibb.co/HYZxmsj/admin.png)
+![App Screenshot](https://i.ibb.co/YBMhsbj/admin.png)
 
 Product Page
 ![App Screenshot](https://i.ibb.co/k6HvXRx/product.png)
@@ -52,4 +52,4 @@ Cart Page
 ![App Screenshot](https://i.ibb.co/8Drv09G/cart.png)
 
 Checkout Page
-![App Screenshot](https://i.ibb.co/rdBRT63/chec.png)
+![App Screenshot](https://i.ibb.co/3mg152Y/payment.png)
