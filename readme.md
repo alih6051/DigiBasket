@@ -3,7 +3,7 @@
 
 Digi Basket is a clone of bigbasket.com. It is an online grocery shopping and supermarket that delivers personal and household needs to the customer's doorstep.
 
-This was a collaborative project made by 3 members Executed in 5 days.
+This was a collaborative project made by 5 members Executed in 5 days.
 1) Mohd Hasan Ali
 2) Md Yajul Ansari
 3) Abhinandan Kumar
